@@ -1,0 +1,69 @@
+﻿<Page
+    x:Class="Command_Prompt.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Command_Prompt"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    RequestedTheme="Default"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <RelativePanel Grid.Row="0">
+            <Border x:Name="HeaderBorder"
+                RelativePanel.AlignRightWithPanel="True"
+                     RelativePanel.AlignLeftWithPanel="True" Height="45" Margin="-2,0,-2,0" BorderThickness="1" BorderBrush="#FFA0A0A0">
+                <TextBox x:Name="MainHeader" 
+                       Text="Command Prompt"
+                      IsColorFontEnabled="True"
+                     IsHitTestVisible="False"
+                     IsReadOnly="True"
+                     TextAlignment="Left"
+                     
+                     RelativePanel.RightOf="MainIcon"
+                       RelativePanel.AlignRightWithPanel="True"
+                     RelativePanel.AlignLeftWithPanel="True" RequestedTheme="Default" Height="50" FontSize="18" FontFamily="Segoe UI Light" Padding="0,0,0,0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Margin="40,8,0,0" BorderBrush="{x:Null}" Background="{x:Null}" FocusVisualSecondaryBrush="{x:Null}" />
+            </Border>
+            <Button x:Name="BtnFlyout" Click="BtnFlyout_Click" RelativePanel.AlignRightWithPanel="True" Margin="0,7,10,0" Background="{x:Null}">
+                <SymbolIcon Symbol="Setting" Foreground="{ThemeResource SystemAccentColor}" />
+                <FlyoutBase.AttachedFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="Basic commands" Click="MenuFlyoutItem_Click">
+                            
+                        </MenuFlyoutItem>
+                        <MenuFlyoutItem Text="Clear"  Click="MenuFlyoutItem_Click_1" />
+                        <MenuFlyoutItem Text="Load script" Click="MenuFlyoutItem_Click_2" />
+                        <MenuFlyoutSeparator />
+                        <MenuFlyoutItem Text="Placeholder" />
+                        <MenuFlyoutItem Text="Exit" Click="MenuFlyoutItem_Click_3" />
+                    </MenuFlyout>
+                </FlyoutBase.AttachedFlyout>
+               
+            </Button>
+
+            <FontIcon x:Name="MainIcon" FontFamily="Segoe MDL2 Assets"  Glyph="&#xE756;" Foreground="{ThemeResource SystemAccentColor}" Height="40" Width="40" Margin="0,3,0,0"/>
+            <ProgressBar x:Name="progbar" RelativePanel.Below="HeaderBorder" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" HorizontalAlignment="Stretch" Visibility="Collapsed" Background="{ThemeResource SystemAccentColor}"/>
+        </RelativePanel>
+        <RelativePanel Grid.Row="1">
+            <ProgressBar x:Name="ProgRing" IsIndeterminate="true" HorizontalAlignment="stretch" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" RequestedTheme="Default"  Foreground="{ThemeResource SystemAccentColor}"/>
+
+            <ScrollViewer x:Name="TextScroller" VerticalAlignment="Stretch" VerticalScrollMode="Enabled" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" HorizontalScrollMode="Enabled">
+           
+                <TextBox x:Name="CMDtestText" IsReadOnly="True" FontFamily="Consolas" AcceptsReturn="True" ScrollViewer.VerticalScrollMode="Enabled"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ScrollViewer.HorizontalScrollMode="Enabled" RequestedTheme="Default"  Height="400" Margin="10,10,10,0" Background="{x:Null}" FocusVisualSecondaryBrush="{x:Null}"/>
+
+
+            </ScrollViewer>
+           
+                <TextBox x:Name="SendCommandText"  RelativePanel.AlignLeftWithPanel="True" RelativePanel.Below="TextScroller" Margin="10,10,10,0" HorizontalAlignment="Stretch" RelativePanel.LeftOf="SendCommandBtn" RequestedTheme="Default"/>
+            <Button x:Name="SendCommandBtn" Click="SendCommandBtn_Click" RelativePanel.AlignRightWithPanel="True" RelativePanel.Below="TextScroller"  RequestedTheme="Default"  Content="Send" Margin="0,10,5,0"/>
+
+            </RelativePanel>
+        
+
+    </Grid>
+</Page>
