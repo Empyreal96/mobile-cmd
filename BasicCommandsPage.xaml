@@ -1,0 +1,123 @@
+﻿<Page
+    x:Class="Command_Prompt.BasicCommandsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Command_Prompt"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    RequestedTheme="Default"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <RelativePanel Grid.Row="0" RequestedTheme="Default">
+
+            <Button x:Name="cmdsBackBtn" Click="cmdsBackBtn_Click"  Foreground="{ThemeResource SystemAccentColor}" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,5,0,0">
+                <SymbolIcon Symbol="Back"/>
+            </Button>
+            <TextBlock x:Name="cmdsHeader"
+                           
+                           HorizontalAlignment="Stretch"
+                           RelativePanel.RightOf="cmdsBackBtn"
+                           Text="Basic Commands"
+                            Margin="5,10,5,15"  RequestedTheme="Default"/>
+        </RelativePanel>
+        <RelativePanel Grid.Row="1">
+            <TextBox x:Name="cmdinfoheader" RelativePanel.AlignLeftWithPanel="True" Text="View some basic commands for use in Command Prompt. Text inside [] is optional" TextWrapping="Wrap" RequestedTheme="Default" IsHitTestVisible="False" IsReadOnly="True"  Margin="-2,1,-2,0" RelativePanel.AlignRightWithPanel="True" Background="#FFCCCCCC" BorderBrush="#FFCCCCCC"/>
+            <ScrollViewer x:Name="SyntaxScroller"  RelativePanel.Below="cmdinfoheader" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
+                <Grid x:Name="SyntaxGrid" Margin="5,5,5,5" ScrollViewer.VerticalScrollMode="Enabled" RelativePanel.Below="SyntaxInfo" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True"  BorderBrush="#FF686868" Background="#FF2D2D30" FocusVisualSecondaryBrush="#FF686868">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+
+                    <Border Background="#FFCCCCCC"  Grid.Row="0" Grid.Column="0" BorderBrush="#FF1E1E1E" BorderThickness="1,1,1,1">
+                        <TextBlock x:Name="cdInfo" Grid.Row="0" TextWrapping="Wrap" Grid.Column="0" Text="cd = Change Directory, this allows you to change folders" Margin="4,0,2,0"/>
+                    </Border>
+                    <Border Background="#FFCCCCCC" Grid.Row="0" Grid.Column="1" BorderBrush="#FF1E1E1E" BorderThickness="1,1,1,1">
+                        <TextBlock x:Name="cdSyntax" Grid.Column="1" TextWrapping="Wrap" Grid.Row="0" Text="info" Margin="4,0,2,0"/>
+                    </Border>
+
+                    <Border Background="#FFCCCCCC" Grid.Row="1" Grid.Column="0" BorderBrush="#FF1E1E1E" BorderThickness="1,1,1,1">
+                        <TextBlock x:Name="dirInfo" Grid.Row="1" TextWrapping="Wrap" Grid.Column="0" Text="dir = Directory, use this to list files inside the current folder" Margin="4,0,2,0"/>
+                    </Border>
+                    <Border Background="#FFCCCCCC" Grid.Row="1" Grid.Column="1" BorderBrush="#FF1E1E1E" BorderThickness="1,1,1,1">
+                        <TextBlock x:Name="dirSyntax" Grid.Column="1" TextWrapping="Wrap" Grid.Row="1" Text="Syntax" Margin="4,0,2,0"/>
+                    </Border>
+
+                    <Border Background="#FFCCCCCC" Grid.Row="2" Grid.Column="0" BorderBrush="#FF1E1E1E" BorderThickness="1,1,1,1">
+                        <TextBlock x:Name="setInfo" Grid.Row="2" TextWrapping="Wrap" Grid.Column="0" Text="set = Set Variables, use this to Read/Modify/Create environment variables." Margin="4,0,2,0"/>
+                    </Border>
+                    <Border Background="#FFCCCCCC" Grid.Row="2" Grid.Column="1" BorderBrush="#FF1E1E1E" BorderThickness="1,1,1,1">
+                        <TextBlock x:Name="setSyntax" Grid.Column="1" TextWrapping="Wrap" Grid.Row="2" Text="Syntax" Margin="4,0,2,0"/>
+                    </Border>
+
+                    <Border Background="#FFCCCCCC" Grid.Row="3" Grid.Column="0" BorderBrush="#FF1E1E1E" BorderThickness="1,1,1,1">
+                        <TextBlock x:Name="copyInfo" Grid.Row="3" TextWrapping="Wrap" Grid.Column="0" Text="copy/xcopy = Copy, use either one to copy files" Margin="4,0,2,0"/>
+                    </Border>
+                    <Border Background="#FFCCCCCC" Grid.Row="3" Grid.Column="1" BorderBrush="#FF1E1E1E" BorderThickness="1,1,1,1">
+                        <TextBlock x:Name="copySyntax" Grid.Column="1" TextWrapping="Wrap" Grid.Row="3" Text="Syntax" Margin="4,0,2,0"/>
+                    </Border>
+
+                   
+
+                    <Border Background="#FFCCCCCC" Grid.Row="5" Grid.Column="0" BorderBrush="#FF1E1E1E" BorderThickness="1,1,1,1">
+                        <TextBlock x:Name="mkdirInfo" Grid.Row="5" TextWrapping="Wrap" Grid.Column="0" Text="mkdir = Make Directory" Margin="4,0,2,0"/>
+                    </Border>
+                    <Border Background="#FFCCCCCC" Grid.Row="5" Grid.Column="1" BorderBrush="#FF1E1E1E" BorderThickness="1,1,1,1">
+                        <TextBlock x:Name="mkdirSyntax" Grid.Row="5" TextWrapping="Wrap" Grid.Column="1" Text="Syntax" Margin="4,0,2,0"/>
+                    </Border>
+
+                    <Border Background="#FFCCCCCC" Grid.Row="6" Grid.Column="0" BorderBrush="#FF1E1E1E" BorderThickness="1,1,1,1">
+                        <TextBlock x:Name="renameInfo" Grid.Row="6" TextWrapping="Wrap" Grid.Column="0" Text="rename = Rename File" Margin="4,0,2,0"/>
+                    </Border>
+                    <Border Background="#FFCCCCCC" Grid.Row="6" Grid.Column="1" BorderBrush="#FF1E1E1E" BorderThickness="1,1,1,1">
+                        <TextBlock x:Name="renameSyntax" Grid.Row="6" TextWrapping="Wrap" Grid.Column="1" Text="Syntax" Margin="4,0,2,0"/>
+                    </Border>
+
+                    <Border Background="#FFCCCCCC" Grid.Row="7" Grid.Column="0" BorderBrush="#FF1E1E1E" BorderThickness="1,1,1,1">
+                        <TextBlock x:Name="moveInfo" Grid.Row="7" TextWrapping="Wrap" Grid.Column="0" Text="move = Move File" Margin="4,0,2,0"/>
+                    </Border>
+                    <Border Background="#FFCCCCCC" Grid.Row="7" Grid.Column="1" BorderBrush="#FF1E1E1E" BorderThickness="1,1,1,1">
+                        <TextBlock x:Name="moveSyntax" Grid.Row="7" TextWrapping="Wrap" Grid.Column="1" Text="Syntax" Margin="4,0,2,0"/>
+                    </Border>
+
+                    <Border Background="#FFCCCCCC" Grid.Row="8" Grid.Column="0" BorderBrush="#FF1E1E1E" BorderThickness="1,1,1,1">
+                        <TextBlock x:Name="rmdirInfo" Grid.Row="8" TextWrapping="Wrap" Grid.Column="0" Text="rmdir / rd = Remove Directory" Margin="4,0,2,0"/>
+                    </Border>
+                    <Border Background="#FFCCCCCC" Grid.Row="8" Grid.Column="1" BorderBrush="#FF1E1E1E" BorderThickness="1,1,1,1">
+                        <TextBlock x:Name="rmdirSyntax" Grid.Row="8" TextWrapping="Wrap" Grid.Column="1" Text="Syntax" Margin="4,0,2,0"/>
+                    </Border>
+
+                    <Border Background="#FFCCCCCC" Grid.Row="9" Grid.Column="0" BorderBrush="#FF1E1E1E" BorderThickness="1,1,1,1">
+                        <TextBlock x:Name="typeInfo" Grid.Row="9" TextWrapping="Wrap" Grid.Column="0" Text="type = Type, this prints the text of a file on-screen"   Margin="4,0,2,0"/>
+                    </Border>
+                    <Border Background="#FFCCCCCC" Grid.Row="9" Grid.Column="1" BorderBrush="#FF1E1E1E" BorderThickness="1,1,1,1">
+                        <TextBlock x:Name="typeSyntax" Grid.Row="9" TextWrapping="Wrap" Grid.Column="1" Text="Syntax" Margin="4,0,2,0"/>
+                    </Border>
+
+                </Grid>
+            </ScrollViewer>
+        </RelativePanel>
+            
+    </Grid>
+</Page>

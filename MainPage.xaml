@@ -7,6 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     RequestedTheme="Default"
+    NavigationCacheMode="Required"
+   
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
@@ -36,10 +38,10 @@
                         <MenuFlyoutItem Text="Basic commands" Click="MenuFlyoutItem_Click">
                             
                         </MenuFlyoutItem>
-                        <MenuFlyoutItem Text="Clear"  Click="MenuFlyoutItem_Click_1" />
+                        <MenuFlyoutItem Text="Clear Window"  Click="MenuFlyoutItem_Click_1" />
                         <MenuFlyoutItem Text="Load script" Click="MenuFlyoutItem_Click_2" />
                         <MenuFlyoutSeparator />
-                        <MenuFlyoutItem Text="Placeholder" />
+                        <MenuFlyoutItem Text="About" Click="MenuFlyoutItem_Click_4" />
                         <MenuFlyoutItem Text="Exit" Click="MenuFlyoutItem_Click_3" />
                     </MenuFlyout>
                 </FlyoutBase.AttachedFlyout>
@@ -50,16 +52,15 @@
             <ProgressBar x:Name="progbar" RelativePanel.Below="HeaderBorder" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" HorizontalAlignment="Stretch" Visibility="Collapsed" Background="{ThemeResource SystemAccentColor}"/>
         </RelativePanel>
         <RelativePanel Grid.Row="1">
-            <ProgressBar x:Name="ProgRing" IsIndeterminate="true" HorizontalAlignment="stretch" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" RequestedTheme="Default"  Foreground="{ThemeResource SystemAccentColor}"/>
 
             <ScrollViewer x:Name="TextScroller" VerticalAlignment="Stretch" VerticalScrollMode="Enabled" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" HorizontalScrollMode="Enabled">
            
-                <TextBox x:Name="CMDtestText" IsReadOnly="True" FontFamily="Consolas" AcceptsReturn="True" ScrollViewer.VerticalScrollMode="Enabled"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ScrollViewer.HorizontalScrollMode="Enabled" RequestedTheme="Default"  Height="400" Margin="10,10,10,0" Background="{x:Null}" FocusVisualSecondaryBrush="{x:Null}"/>
+                <TextBox x:Name="CMDtestText" IsReadOnly="True" FontFamily="Consolas" AcceptsReturn="True" ScrollViewer.VerticalScrollMode="Enabled"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ScrollViewer.HorizontalScrollMode="Enabled" RequestedTheme="Default"  Height="400" Margin="5,10,5,0" Background="{x:Null}" FocusVisualSecondaryBrush="{x:Null}" BorderBrush="{x:Null}"/>
 
 
             </ScrollViewer>
            
-                <TextBox x:Name="SendCommandText"  RelativePanel.AlignLeftWithPanel="True" RelativePanel.Below="TextScroller" Margin="10,10,10,0" HorizontalAlignment="Stretch" RelativePanel.LeftOf="SendCommandBtn" RequestedTheme="Default"/>
+                <TextBox x:Name="SendCommandText"  RelativePanel.AlignLeftWithPanel="True" RelativePanel.Below="TextScroller" Margin="10,10,10,0" HorizontalAlignment="Stretch" RelativePanel.LeftOf="SendCommandBtn" RequestedTheme="Default" FontFamily="Consolas"/>
             <Button x:Name="SendCommandBtn" Click="SendCommandBtn_Click" RelativePanel.AlignRightWithPanel="True" RelativePanel.Below="TextScroller"  RequestedTheme="Default"  Content="Send" Margin="0,10,5,0"/>
 
             </RelativePanel>

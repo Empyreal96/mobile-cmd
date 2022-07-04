@@ -9,13 +9,13 @@
     <AppxShowAllApps>False</AppxShowAllApps>
     <AppxBuildConfigurationSelection>arm</AppxBuildConfigurationSelection>
     <PackageOptionalProjectsInIdeBuilds>True</PackageOptionalProjectsInIdeBuilds>
-    <Source>C:\Users\Empyreal96\Pictures\icons\cmd.png</Source>
-    <SmallTileSource>C:\Users\Empyreal96\Pictures\icons\cmd.png</SmallTileSource>
-    <MediumTileSource>C:\Users\Empyreal96\Pictures\icons\cmd.png</MediumTileSource>
-    <WideTileSource>C:\Users\Empyreal96\Pictures\icons\cmd.png</WideTileSource>
-    <LargeTileSource>C:\Users\Empyreal96\Pictures\icons\cmd.png</LargeTileSource>
-    <AppIconSource>C:\Users\Empyreal96\Pictures\icons\cmd.png</AppIconSource>
-    <SplashScreenSource>C:\Users\Empyreal96\Pictures\icons\cmd.png</SplashScreenSource>
-    <PackageLogoSource>C:\Users\Empyreal96\Pictures\icons\cmd.png</PackageLogoSource>
+    <Source>C:\Users\Empyreal96\Pictures\icons\w11_cmd_Icon8.png</Source>
+    <SmallTileSource>C:\Users\Empyreal96\Pictures\icons\w11_cmd_Icon8.png</SmallTileSource>
+    <MediumTileSource>C:\Users\Empyreal96\Pictures\icons\w11_cmd_Icon8.png</MediumTileSource>
+    <WideTileSource>C:\Users\Empyreal96\Pictures\icons\w11_cmd_Icon8.png</WideTileSource>
+    <LargeTileSource>C:\Users\Empyreal96\Pictures\icons\w11_cmd_Icon8.png</LargeTileSource>
+    <AppIconSource>C:\Users\Empyreal96\Pictures\icons\w11_cmd_Icon8.png</AppIconSource>
+    <SplashScreenSource>C:\Users\Empyreal96\Pictures\icons\w11_cmd_Icon8.png</SplashScreenSource>
+    <PackageLogoSource>C:\Users\Empyreal96\Pictures\icons\w11_cmd_Icon8.png</PackageLogoSource>
   </PropertyGroup>
 </Project>

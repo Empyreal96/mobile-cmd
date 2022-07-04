@@ -5,12 +5,14 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using Telnet;
+using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.System.Profile;
 using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,8 +32,10 @@ namespace Command_Prompt
     {
         string LocalPath = ApplicationData.Current.LocalFolder.Path;
         static CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-        TelnetClient client = new TelnetClient(TimeSpan.FromSeconds(3), cancellationTokenSource.Token);
+        TelnetClient client = new TelnetClient(TimeSpan.FromSeconds(1), cancellationTokenSource.Token);
         public static string CMDCommandText { get; set; }
+
+
 
         public MainPage()
         {
@@ -44,7 +48,7 @@ namespace Command_Prompt
                 HeaderBorder.Background = new SolidColorBrush(Colors.DimGray);
             }
 
-                ApplicationData.Current.LocalFolder.CreateFileAsync("cmdstring.txt", CreationCollisionOption.ReplaceExisting);
+            ApplicationData.Current.LocalFolder.CreateFileAsync("cmdstring.txt", CreationCollisionOption.ReplaceExisting);
 
 
             string deviceFamilyVersion = AnalyticsInfo.VersionInfo.DeviceFamilyVersion;
@@ -57,20 +61,16 @@ namespace Command_Prompt
 
             Globals.ReportedBuildVersion = build;
             Globals.FullBuildNumber = osVersion;
-            ProgRing.IsEnabled = false;
-            ProgRing.Visibility = Visibility.Collapsed;
             try
             {
                 Connect();
             }
             catch (Exception ex)
             {
-                ProgRing.IsEnabled = false;
-                ProgRing.Visibility = Visibility.Collapsed;
                 ProgressBarControl(false);
 
                 Exceptions.ThrowFullError(ex);
-                
+
             }
         }
 
@@ -78,7 +78,7 @@ namespace Command_Prompt
 
         public async void Connect()
         {
-           
+
             try
             {
                 ProgressBarControl(true);
@@ -149,27 +149,27 @@ namespace Command_Prompt
                 ProgressBarControl(true);
                 var text = CMDtestText.Text;
                 CMDtestText.Text = text.Remove(text.Length - 1);
-                CMDtestText.Text += $"{SendCommandText.Text}\n";
+                CMDtestText.Text += $"{SendCommandText.Text}\r\n";
                 StorageFile tmp = await ApplicationData.Current.LocalFolder.GetFileAsync("cmdstring.txt");
-                ProgRing.IsEnabled = true;
-                ProgRing.Visibility = Visibility.Visible;
+          
                 string command = SendCommandText.Text;
                 if (command.Length != 0)
                 {
-                    CMDtestText.Text += "\n";
+                    CMDtestText.Text += "\r\n";
                     await client.Send($"{command} > \"{LocalPath}\\cmdstring.txt\" 2>&1");
 
                     //await Task.Delay(500);
-                    string results = File.ReadAllText($"{LocalPath}\\cmdstring.txt");
-
+                    //  string results = File.ReadAllText($"{LocalPath}\\cmdstring.txt");
+                    string[] resArray = File.ReadAllLines($"{LocalPath}\\cmdstring.txt");
                     await client.Send($"echo %CD%^> > \"{LocalPath}\\cmdstring.txt\" 2>&1");
-                    CMDtestText.Text += $"{results}";
-                    // await Task.Delay(500);
                     string cd = File.ReadAllText($"{LocalPath}\\cmdstring.txt");
-                    CMDtestText.Text += $"\n\n{cd}";
+                    foreach (string results in resArray)
+                    {
+                        CMDtestText.Text += $"{results}\r\n";
+                        // await Task.Delay(500);
+                    }
+                    CMDtestText.Text += $"\r\n\r\n{cd}";
 
-                    ProgRing.IsEnabled = false;
-                    ProgRing.Visibility = Visibility.Collapsed;
                     SendCommandText.Text = "";
 
 
@@ -188,8 +188,7 @@ namespace Command_Prompt
             }
             catch (Exception ex)
             {
-                ProgRing.IsEnabled = false;
-                ProgRing.Visibility = Visibility.Collapsed;
+       
                 Exceptions.ThrowFullError(ex);
                 ProgressBarControl(false);
 
@@ -199,6 +198,7 @@ namespace Command_Prompt
         private void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
         {
             // Basic commands
+            Frame.Navigate(typeof(BasicCommandsPage));
         }
 
         private async void MenuFlyoutItem_Click_1(object sender, RoutedEventArgs e)
@@ -224,7 +224,7 @@ namespace Command_Prompt
                 FileOpenPicker file = new FileOpenPicker();
                 file.FileTypeFilter.Add(".bat");
                 file.FileTypeFilter.Add(".cmd");
-                file.FileTypeFilter.Add(".exe");
+                //file.FileTypeFilter.Add(".exe");
 
                 StorageFile storage = await file.PickSingleFileAsync();
                 if (storage == null)
@@ -234,15 +234,21 @@ namespace Command_Prompt
                 string scriptPath = storage.Path;
                 string scriptParent = Path.GetDirectoryName(scriptPath);
 
+                // goto script dir
                 await client.Send($"cd /d \"{scriptParent}\" > \"{LocalPath}\\cmdstring.txt\" 2>&1");
-                
+
+
+                CMDtestText.Text += $"cd /d \"{scriptParent}\"\r\n";
                 await client.Send($"echo %CD%^> > \"{LocalPath}\\cmdstring.txt\" 2>&1");
+
                 string results = File.ReadAllText($"{LocalPath}\\cmdstring.txt");
-                CMDtestText.Text += $"{results}\n";
+                CMDtestText.Text += $"{results}r\n";
 
 
                 await client.Send($"\"{storage.Path}\" > \"{LocalPath}\\cmdstring.txt\" 2>&1");
                 string results2 = File.ReadAllText($"{LocalPath}\\cmdstring.txt");
+                //string[] results2 = File.ReadAllLines($"{LocalPath}\\cmdstring.txt");
+
                 CMDtestText.Text += $"{results2}\n";
 
                 await client.Send($"echo %CD%^> > \"{LocalPath}\\cmdstring.txt\" 2>&1");
@@ -287,6 +293,8 @@ namespace Command_Prompt
 
             if (await dialog.ShowAsync() == ContentDialogResult.Primary)
             {
+                client.Disconnect();
+                client.Dispose();
                 Windows.UI.Xaml.Application.Current.Exit();
             }
         }
@@ -305,12 +313,25 @@ namespace Command_Prompt
                 progbar.IsEnabled = true;
                 progbar.IsIndeterminate = true;
                 progbar.Visibility = Visibility.Visible;
-            } else
+            }
+            else
             {
                 progbar.IsEnabled = false;
                 progbar.IsIndeterminate = false;
                 progbar.Visibility = Visibility.Collapsed;
             }
+        }
+
+       
+
+        private void MenuFlyoutItem_Click_4(object sender, RoutedEventArgs e)
+        {
+            Exceptions.CustomMessage(
+                "Command Prompt for Windows 10 Mobile:\n\n" +
+                "- Thanks to Fadil Fadz for CMD Injector and some help with output formatting.\n" +
+                "- Thanks to BAstifan for the TelnetClient library\n\n" +
+                "Any Issues? Submit an issue on \"https://github.com/empyreal96/mobile-cmd\""
+                ) ;
         }
     }
 }

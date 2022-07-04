@@ -9,7 +9,7 @@
   <Identity
     Name="WPCommandPrompt"
     Publisher="CN=Empyreal96"
-    Version="0.0.21.0" />
+    Version="0.0.24.0" />
 
   <mp:PhoneIdentity PhoneProductId="7c02d3dd-afe8-4c25-a609-a888b4adf4f7" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
@@ -37,7 +37,13 @@
         Square44x44Logo="Assets\Square44x44Logo.png"
         Description="Command Prompt for WIndows 10 Mobile"
         BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png"/>
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png" ShortName="Command Prompt">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo"/>
+            <uap:ShowOn Tile="wide310x150Logo"/>
+            <uap:ShowOn Tile="square310x310Logo"/>
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile >
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
     </Application>
