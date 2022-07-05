@@ -149,13 +149,13 @@ namespace Command_Prompt
                 ProgressBarControl(true);
                 var text = CMDtestText.Text;
                 CMDtestText.Text = text.Remove(text.Length - 1);
-                CMDtestText.Text += $"{SendCommandText.Text}\r\n";
+                CMDtestText.Text += $"{SendCommandText.Text}\n";
                 StorageFile tmp = await ApplicationData.Current.LocalFolder.GetFileAsync("cmdstring.txt");
           
                 string command = SendCommandText.Text;
                 if (command.Length != 0)
                 {
-                    CMDtestText.Text += "\r\n";
+                    CMDtestText.Text += "\n";
                     await client.Send($"{command} > \"{LocalPath}\\cmdstring.txt\" 2>&1");
 
                     //await Task.Delay(500);
@@ -165,10 +165,10 @@ namespace Command_Prompt
                     string cd = File.ReadAllText($"{LocalPath}\\cmdstring.txt");
                     foreach (string results in resArray)
                     {
-                        CMDtestText.Text += $"{results}\r\n";
+                        CMDtestText.Text += $"{results}\n";
                         // await Task.Delay(500);
                     }
-                    CMDtestText.Text += $"\r\n\r\n{cd}";
+                    CMDtestText.Text += $"\n\n{cd}";
 
                     SendCommandText.Text = "";
 
@@ -238,7 +238,7 @@ namespace Command_Prompt
                 await client.Send($"cd /d \"{scriptParent}\" > \"{LocalPath}\\cmdstring.txt\" 2>&1");
 
 
-                CMDtestText.Text += $"cd /d \"{scriptParent}\"\r\n";
+                CMDtestText.Text += $"cd /d \"{scriptParent}\"\n";
                 await client.Send($"echo %CD%^> > \"{LocalPath}\\cmdstring.txt\" 2>&1");
 
                 string results = File.ReadAllText($"{LocalPath}\\cmdstring.txt");
