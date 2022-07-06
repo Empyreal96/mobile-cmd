@@ -229,6 +229,7 @@ namespace Command_Prompt
                 StorageFile storage = await file.PickSingleFileAsync();
                 if (storage == null)
                 {
+                    ProgressBarControl(false);
                     return;
                 }
                 string scriptPath = storage.Path;
@@ -238,22 +239,24 @@ namespace Command_Prompt
                 await client.Send($"cd /d \"{scriptParent}\" > \"{LocalPath}\\cmdstring.txt\" 2>&1");
 
 
-                CMDtestText.Text += $"cd /d \"{scriptParent}\"\n";
+                CMDtestText.Text += $"\n\nChanging to Script Directory: \"{scriptParent}\" and executing Script\nPlease Wait\n\n";
                 await client.Send($"echo %CD%^> > \"{LocalPath}\\cmdstring.txt\" 2>&1");
 
                 string results = File.ReadAllText($"{LocalPath}\\cmdstring.txt");
-                CMDtestText.Text += $"{results}r\n";
+                CMDtestText.Text += $"{results}\n\n";
 
+                
 
                 await client.Send($"\"{storage.Path}\" > \"{LocalPath}\\cmdstring.txt\" 2>&1");
-                string results2 = File.ReadAllText($"{LocalPath}\\cmdstring.txt");
-                //string[] results2 = File.ReadAllLines($"{LocalPath}\\cmdstring.txt");
-
-                CMDtestText.Text += $"{results2}\n";
-
+                //string results2 = File.ReadAllText($"{LocalPath}\\cmdstring.txt");
+                string[] results2 = File.ReadAllLines($"{LocalPath}\\cmdstring.txt");
+                foreach (string var in results2)
+                {
+                    CMDtestText.Text += $"\n{var}";
+                }
                 await client.Send($"echo %CD%^> > \"{LocalPath}\\cmdstring.txt\" 2>&1");
                 string results3 = File.ReadAllText($"{LocalPath}\\cmdstring.txt");
-                CMDtestText.Text += $"{results3}";
+                CMDtestText.Text += $"\n\n{results3}\n\n";
 
 
                 var grid = (Grid)VisualTreeHelper.GetChild(CMDtestText, 0);
@@ -327,9 +330,10 @@ namespace Command_Prompt
         private void MenuFlyoutItem_Click_4(object sender, RoutedEventArgs e)
         {
             Exceptions.CustomMessage(
-                "Command Prompt for Windows 10 Mobile:\n\n" +
+                "Command Prompt v0.1.0 for Windows 10 Mobile:\n\n" +
                 "- Thanks to Fadil Fadz for CMD Injector and some help with output formatting.\n" +
                 "- Thanks to BAstifan for the TelnetClient library\n\n" +
+                "Note: Only simple scripts are supported at this time, example is scripts with NO user input\n\n" +
                 "Any Issues? Submit an issue on \"https://github.com/empyreal96/mobile-cmd\""
                 ) ;
         }
