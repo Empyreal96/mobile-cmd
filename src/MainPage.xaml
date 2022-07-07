@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     RequestedTheme="Default"
+    SizeChanged="Page_SizeChanged"
     NavigationCacheMode="Required"
    
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -15,6 +16,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="48"/>
         </Grid.RowDefinitions>
         <RelativePanel Grid.Row="0">
             <Border x:Name="HeaderBorder"
@@ -53,15 +55,13 @@
         </RelativePanel>
         <RelativePanel Grid.Row="1">
 
-            <ScrollViewer x:Name="TextScroller" VerticalAlignment="Stretch" VerticalScrollMode="Enabled" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" HorizontalScrollMode="Enabled">
            
-                <TextBox x:Name="CMDtestText" IsReadOnly="True" FontFamily="Consolas" AcceptsReturn="True" ScrollViewer.VerticalScrollMode="Enabled"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ScrollViewer.HorizontalScrollMode="Enabled" RequestedTheme="Default"  Height="400" Margin="5,10,5,0" Background="{x:Null}" FocusVisualSecondaryBrush="{x:Null}" BorderBrush="{x:Null}"/>
+                <TextBox x:Name="CMDtestText" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" IsReadOnly="True" FontFamily="Consolas" AcceptsReturn="True" ScrollViewer.VerticalScrollMode="Enabled"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ScrollViewer.HorizontalScrollMode="Enabled" RequestedTheme="Default"  Height="240" Margin="5,10,5,0" Background="{x:Null}" FocusVisualSecondaryBrush="{x:Null}" BorderBrush="{x:Null}"/>
 
 
-            </ScrollViewer>
            
-                <TextBox x:Name="SendCommandText"  RelativePanel.AlignLeftWithPanel="True" RelativePanel.Below="TextScroller" Margin="10,10,10,0" HorizontalAlignment="Stretch" RelativePanel.LeftOf="SendCommandBtn" RequestedTheme="Default" FontFamily="Consolas"/>
-            <Button x:Name="SendCommandBtn" Click="SendCommandBtn_Click" RelativePanel.AlignRightWithPanel="True" RelativePanel.Below="TextScroller"  RequestedTheme="Default"  Content="Send" Margin="0,10,5,0"/>
+                <TextBox x:Name="SendCommandText"  RelativePanel.AlignLeftWithPanel="True" RelativePanel.Below="CMDtestText" Margin="10,10,10,0" HorizontalAlignment="Stretch" RelativePanel.LeftOf="SendCommandBtn" RequestedTheme="Default" FontFamily="Consolas"/>
+            <Button x:Name="SendCommandBtn" Click="SendCommandBtn_Click" RelativePanel.AlignRightWithPanel="True" RelativePanel.Below="CMDtestText"  RequestedTheme="Default"  Content="Send" Margin="0,10,5,0"/>
 
             </RelativePanel>
         

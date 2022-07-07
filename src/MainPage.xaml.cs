@@ -48,6 +48,8 @@ namespace Command_Prompt
                 HeaderBorder.Background = new SolidColorBrush(Colors.DimGray);
             }
 
+           
+
             ApplicationData.Current.LocalFolder.CreateFileAsync("cmdstring.txt", CreationCollisionOption.ReplaceExisting);
 
 
@@ -151,7 +153,7 @@ namespace Command_Prompt
                 CMDtestText.Text = text.Remove(text.Length - 1);
                 CMDtestText.Text += $"{SendCommandText.Text}\n";
                 StorageFile tmp = await ApplicationData.Current.LocalFolder.GetFileAsync("cmdstring.txt");
-          
+
                 string command = SendCommandText.Text;
                 if (command.Length != 0)
                 {
@@ -188,7 +190,7 @@ namespace Command_Prompt
             }
             catch (Exception ex)
             {
-       
+
                 Exceptions.ThrowFullError(ex);
                 ProgressBarControl(false);
 
@@ -245,7 +247,7 @@ namespace Command_Prompt
                 string results = File.ReadAllText($"{LocalPath}\\cmdstring.txt");
                 CMDtestText.Text += $"{results}\n\n";
 
-                
+
 
                 await client.Send($"\"{storage.Path}\" > \"{LocalPath}\\cmdstring.txt\" 2>&1");
                 //string results2 = File.ReadAllText($"{LocalPath}\\cmdstring.txt");
@@ -325,17 +327,37 @@ namespace Command_Prompt
             }
         }
 
-       
+
 
         private void MenuFlyoutItem_Click_4(object sender, RoutedEventArgs e)
         {
             Exceptions.CustomMessage(
-                "Command Prompt v0.1.0 for Windows 10 Mobile:\n\n" +
+                "Command Prompt v0.1.4 for Windows 10 Mobile:\n\n" +
                 "- Thanks to Fadil Fadz for CMD Injector and some help with output formatting.\n" +
                 "- Thanks to BAstifan for the TelnetClient library\n\n" +
                 "Note: Only simple scripts are supported at this time, example is scripts with NO user input\n\n" +
                 "Any Issues? Submit an issue on \"https://github.com/empyreal96/mobile-cmd\""
-                ) ;
+                );
+        }
+
+        private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            bool isInLandscapeMode =
+Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().Orientation ==
+Windows.UI.ViewManagement.ApplicationViewOrientation.Landscape;
+
+            ApplicationData.Current.LocalSettings.Values["Orientation"] = isInLandscapeMode ?
+            "Landscape" : "Portrait";
+
+
+            if (isInLandscapeMode == true)
+            {
+                CMDtestText.Height = 240;
+
+            } else
+            {
+                CMDtestText.Height = 400;
+            }
         }
     }
 }
