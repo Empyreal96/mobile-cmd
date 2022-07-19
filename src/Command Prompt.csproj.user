@@ -9,14 +9,14 @@
     <AppxShowAllApps>False</AppxShowAllApps>
     <AppxBuildConfigurationSelection>arm</AppxBuildConfigurationSelection>
     <PackageOptionalProjectsInIdeBuilds>True</PackageOptionalProjectsInIdeBuilds>
-    <Source>C:\Users\Empyreal96\Pictures\icons\w11_cmd_Icon8.png</Source>
-    <SmallTileSource>C:\Users\Empyreal96\Pictures\icons\w11_cmd_Icon8.png</SmallTileSource>
-    <MediumTileSource>C:\Users\Empyreal96\Pictures\icons\w11_cmd_Icon8.png</MediumTileSource>
-    <WideTileSource>C:\Users\Empyreal96\Pictures\icons\w11_cmd_Icon8.png</WideTileSource>
-    <LargeTileSource>C:\Users\Empyreal96\Pictures\icons\w11_cmd_Icon8.png</LargeTileSource>
-    <AppIconSource>C:\Users\Empyreal96\Pictures\icons\w11_cmd_Icon8.png</AppIconSource>
-    <SplashScreenSource>C:\Users\Empyreal96\Pictures\icons\w11_cmd_Icon8.png</SplashScreenSource>
-    <PackageLogoSource>C:\Users\Empyreal96\Pictures\icons\w11_cmd_Icon8.png</PackageLogoSource>
+    <Source>C:\Users\Empyreal96\Pictures\icons\terminal.png</Source>
+    <SmallTileSource>C:\Users\Empyreal96\Pictures\icons\terminal.png</SmallTileSource>
+    <MediumTileSource>C:\Users\Empyreal96\Pictures\icons\terminal.png</MediumTileSource>
+    <WideTileSource>C:\Users\Empyreal96\Pictures\icons\terminal.png</WideTileSource>
+    <LargeTileSource>C:\Users\Empyreal96\Pictures\icons\terminal.png</LargeTileSource>
+    <AppIconSource>C:\Users\Empyreal96\Pictures\icons\terminal.png</AppIconSource>
+    <SplashScreenSource>C:\Users\Empyreal96\Pictures\icons\terminal.png</SplashScreenSource>
+    <PackageLogoSource>C:\Users\Empyreal96\Pictures\icons\terminal.png</PackageLogoSource>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
     <DeviceId>30f105c9-681e-420b-a277-7c086ead8a4e</DeviceId>

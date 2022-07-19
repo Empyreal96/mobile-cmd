@@ -40,7 +40,7 @@ namespace Command_Prompt
                     "SET";
             copySyntax.Text =
                 "XCOPY (source) (destination)\n" +
-                "COPY (source) (destination)" +
+                "COPY (source) (destination)\n" +
                 "XCOPY .\\MyFile.txt C:\\Windows\\Temp\n" +
                 "COPY .\\MyFile.txt \"C:\\Program Files\"";
             mkdirSyntax.Text =

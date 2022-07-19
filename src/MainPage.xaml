@@ -31,7 +31,7 @@
                      
                      RelativePanel.RightOf="MainIcon"
                        RelativePanel.AlignRightWithPanel="True"
-                     RelativePanel.AlignLeftWithPanel="True" RequestedTheme="Default" Height="50" FontSize="18" FontFamily="Segoe UI Light" Padding="0,0,0,0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Margin="40,8,0,0" BorderBrush="{x:Null}" Background="{x:Null}" FocusVisualSecondaryBrush="{x:Null}" />
+                     RelativePanel.AlignLeftWithPanel="True" RequestedTheme="Default" Height="50" FontSize="18" FontFamily="Segoe UI Light" Padding="0,0,0,0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Margin="40,7,0,0" BorderBrush="{x:Null}" Background="{x:Null}" FocusVisualSecondaryBrush="{x:Null}" FontWeight="Normal" IsTextPredictionEnabled="False" IsTabStop="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" IsTapEnabled="False" ManipulationMode="None" AllowFocusOnInteraction="False" PreventKeyboardDisplayOnProgrammaticFocus="True" />
             </Border>
             <Button x:Name="BtnFlyout" Click="BtnFlyout_Click" RelativePanel.AlignRightWithPanel="True" Margin="0,7,10,0" Background="{x:Null}">
                 <SymbolIcon Symbol="Setting" Foreground="{ThemeResource SystemAccentColor}" />
@@ -42,8 +42,10 @@
                         </MenuFlyoutItem>
                         <MenuFlyoutItem Text="Clear Window"  Click="MenuFlyoutItem_Click_1" />
                         <MenuFlyoutItem Text="Load script" Click="MenuFlyoutItem_Click_2" />
+                        <MenuFlyoutItem Text="Open Folder" Click="MenuFlyoutItem_Click_5"/>
                         <MenuFlyoutSeparator />
                         <MenuFlyoutItem Text="About" Click="MenuFlyoutItem_Click_4" />
+                        <MenuFlyoutItem Text="Changelog" Click="MenuFlyoutItem_Click_6"></MenuFlyoutItem>
                         <MenuFlyoutItem Text="Exit" Click="MenuFlyoutItem_Click_3" />
                     </MenuFlyout>
                 </FlyoutBase.AttachedFlyout>

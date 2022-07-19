@@ -9,7 +9,7 @@
   <Identity
     Name="WPCommandPrompt"
     Publisher="CN=Empyreal96"
-    Version="0.1.4.0" />
+    Version="0.1.9.0" />
 
   <mp:PhoneIdentity PhoneProductId="7c02d3dd-afe8-4c25-a609-a888b4adf4f7" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
