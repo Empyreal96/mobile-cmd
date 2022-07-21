@@ -62,7 +62,7 @@
 
 
            
-                <TextBox x:Name="SendCommandText"  RelativePanel.AlignLeftWithPanel="True" RelativePanel.Below="CMDtestText" Margin="10,10,10,0" HorizontalAlignment="Stretch" RelativePanel.LeftOf="SendCommandBtn" RequestedTheme="Default" FontFamily="Consolas"/>
+                <TextBox x:Name="SendCommandText" IsSpellCheckEnabled="False" RelativePanel.AlignLeftWithPanel="True" RelativePanel.Below="CMDtestText" Margin="10,10,10,0" HorizontalAlignment="Stretch" RelativePanel.LeftOf="SendCommandBtn" RequestedTheme="Default" FontFamily="Consolas"/>
             <Button x:Name="SendCommandBtn" Click="SendCommandBtn_Click" RelativePanel.AlignRightWithPanel="True" RelativePanel.Below="CMDtestText"  RequestedTheme="Default"  Content="Send" Margin="0,10,5,0"/>
 
             </RelativePanel>
