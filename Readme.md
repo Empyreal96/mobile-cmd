@@ -16,3 +16,4 @@ Easily access 'Windows Command Prompt' on supported Windows Mobile devices, this
 ### Acknowledgements:
 - [BAstifan](https://github.com/basharast) for the TelnetClient class.
 - [Fadil Fadz](https://github.com/fadilfadz01) for CMD Injector and minor help with handling stout and sterr
+- Microsoft for Font files
