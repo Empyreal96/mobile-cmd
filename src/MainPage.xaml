@@ -29,7 +29,6 @@
             VerticalAlignment="Stretch"
             AcceptsReturn="True"
             BorderThickness="0"
-            FontFamily="Consolas"
             IsReadOnly="True"
             PlaceholderText="Enter command here"
             ScrollViewer.HorizontalScrollMode="Enabled"

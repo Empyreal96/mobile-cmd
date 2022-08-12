@@ -19,9 +19,7 @@
                         Width="200"
                         Header="Font"
                         PlaceholderText="Select a Font"
-                        SelectionChanged="ComboBox_SelectionChanged">
-                        <x:String>Consolas</x:String>
-                    </ComboBox>
+                        SelectionChanged="ComboBox_SelectionChanged" />
                 </StackPanel>
             </PivotItem>
         </Pivot>

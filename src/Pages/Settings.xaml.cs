@@ -1,5 +1,6 @@
 ﻿using Windows.Storage;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace Command_Prompt.Pages
 {
@@ -10,6 +11,7 @@ namespace Command_Prompt.Pages
         {
             this.InitializeComponent();
             GetSettings();
+            GetAllFonts();
         }
 
         private void GetSettings()
@@ -19,6 +21,12 @@ namespace Command_Prompt.Pages
             {
                 FontSelection.SelectedItem = Font;
             }
+        }
+
+        private void GetAllFonts()
+        {
+            var fonts = Microsoft.Graphics.Canvas.Text.CanvasTextFormat.GetSystemFontFamilies();
+            FontSelection.ItemsSource = fonts;
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
