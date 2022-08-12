@@ -8,7 +8,7 @@
     <UapAppxPackageBuildMode>SideloadOnly</UapAppxPackageBuildMode>
     <AppxShowAllApps>False</AppxShowAllApps>
     <AppxBuildConfigurationSelection>arm</AppxBuildConfigurationSelection>
-    <PackageOptionalProjectsInIdeBuilds>True</PackageOptionalProjectsInIdeBuilds>
+    <PackageOptionalProjectsInIdeBuilds>False</PackageOptionalProjectsInIdeBuilds>
     <Source>C:\Users\Empyreal96\Pictures\icons\terminal.png</Source>
     <SmallTileSource>C:\Users\Empyreal96\Pictures\icons\terminal.png</SmallTileSource>
     <MediumTileSource>C:\Users\Empyreal96\Pictures\icons\terminal.png</MediumTileSource>

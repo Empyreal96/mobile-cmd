@@ -1,0 +1,58 @@
+﻿<Page
+    x:Class="Command_Prompt.Pages.About"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:Command_Prompt.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    mc:Ignorable="d">
+
+    <Grid>
+        <Pivot>
+            <PivotItem Header="Version">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Image
+                            Width="64"
+                            Height="64"
+                            Source="ms-appx:///Assets/Square44x44Logo.targetsize-256.png" />
+                        <RichTextBlock VerticalAlignment="Center">
+                            <Paragraph>mobile-cmd v0.2-beta</Paragraph>
+                            <Paragraph>Released on Friday, 12th August 2022</Paragraph>
+                        </RichTextBlock>
+                    </StackPanel>
+                    <RichTextBlock>
+                        <Paragraph FontSize="20">
+                            Developers/Maintainers
+                        </Paragraph>
+                        <Paragraph>Made by Empyreal96</Paragraph>
+                        <Paragraph>Now maintained by Pinguin2001</Paragraph>
+
+                        <Paragraph FontSize="20">
+                            Updates
+                        </Paragraph>
+                        <Paragraph>
+                            Follow updates and progress on<Hyperlink NavigateUri="https://t.me/+umgouq2tI78yNmI0">WP Insiders Builds and Apps telegram group</Hyperlink></Paragraph>
+
+                        <Paragraph FontSize="20">Source code</Paragraph>
+                        <Paragraph>
+                            <Hyperlink NavigateUri="https://github.com/Empyreal96/mobile-cmd">GitHub</Hyperlink></Paragraph>
+                    </RichTextBlock>
+                </StackPanel>
+            </PivotItem>
+            <PivotItem Header="Changelog">
+                <RichTextBlock>
+                    <Paragraph>v0.2</Paragraph>
+                    <Paragraph>- Added check for malicious commands</Paragraph>
+                    <Paragraph>- Added Tabs</Paragraph>
+                    <Paragraph>- Added Font settings</Paragraph>
+                    <Paragraph>- Added About page</Paragraph>
+                    <Paragraph>- Fixed cls command not working</Paragraph>
+                    <Paragraph>- Fixed output of commands like bcdedit</Paragraph>
+                    <Paragraph>- Seems faster ™️</Paragraph>
+                </RichTextBlock>
+            </PivotItem>
+        </Pivot>
+    </Grid>
+</Page>

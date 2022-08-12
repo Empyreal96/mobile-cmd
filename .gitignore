@@ -1,0 +1,5 @@
+.vs
+src/AppPackages
+src/bin
+src/obj
+src/BundleArtifacts
