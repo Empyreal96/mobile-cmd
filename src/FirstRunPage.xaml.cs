@@ -120,11 +120,11 @@ namespace Command_Prompt
         private void LoopCmd_Tapped(object sender, TappedRoutedEventArgs e)
         {
             DataPackage dataPackage = new DataPackage();
-            string command = "checknetisolation loopbackexempt -a -n=WPCommandPrompt_6dg21qtxnde1e";
+            string command = "checknetisolation loopbackexempt -a -n=WPCommandPrompt_g5rj6pc6gbtrg";
             dataPackage.RequestedOperation = DataPackageOperation.Copy;
             dataPackage.SetText(command);
             Clipboard.SetContent(dataPackage);
-            Exceptions.CustomMessage("'checknetisolation loopbackexempt -a -n=WPCommandPrompt_6dg21qtxnde1e' copied to clipboard");
+            Exceptions.CustomMessage("'checknetisolation loopbackexempt -a -n=WPCommandPrompt_g5rj6pc6gbtrg' copied to clipboard");
         }
     }
 }

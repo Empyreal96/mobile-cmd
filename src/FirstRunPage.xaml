@@ -2,39 +2,139 @@
     x:Class="Command_Prompt.FirstRunPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Command_Prompt"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:Command_Prompt"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    RequestedTheme="Default">
+    RequestedTheme="Default"
+    mc:Ignorable="d">
 
     <Grid>
         <RelativePanel>
-            <Border x:Name="HeaderBorder"
+            <Border
+                x:Name="HeaderBorder"
+                Height="45"
+                Margin="-2,0,-2,0"
+                RelativePanel.AlignLeftWithPanel="True"
                 RelativePanel.AlignRightWithPanel="True"
-                     RelativePanel.AlignLeftWithPanel="True" RequestedTheme="Default" Height="45" Margin="-2,0,-2,0">
-                <TextBox x:Name="MainHeader" 
-                       Text="Command Prompt: Initial Setup"
-                     
-                     IsHitTestVisible="False"
-                     IsReadOnly="True"
-                     TextAlignment="Left"
-                     
-                     RelativePanel.RightOf="MainIcon"
-                       RelativePanel.AlignRightWithPanel="True"
-                     RelativePanel.AlignLeftWithPanel="True" BorderBrush="{x:Null}" Background="{x:Null}" RequestedTheme="Default" Height="50" FontSize="18" FontFamily="Segoe UI Light" Padding="0,0,0,0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Margin="40,8,0,0"/>
+                RequestedTheme="Default">
+                <TextBox
+                    x:Name="MainHeader"
+                    Height="50"
+                    Margin="40,8,0,0"
+                    Padding="0,0,0,0"
+                    VerticalAlignment="Stretch"
+                    VerticalContentAlignment="Center"
+                    Background="{x:Null}"
+                    BorderBrush="{x:Null}"
+                    FontFamily="Segoe UI Light"
+                    FontSize="18"
+                    IsHitTestVisible="False"
+                    IsReadOnly="True"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.RightOf="MainIcon"
+                    RequestedTheme="Default"
+                    Text="Command Prompt: Initial Setup"
+                    TextAlignment="Left" />
             </Border>
-            <FontIcon x:Name="MainIcon" FontFamily="Segoe MDL2 Assets" Glyph="&#xE756;" Foreground="{ThemeResource SystemAccentColor}" Height="40" Width="40" Margin="0,3,0,0"/>
-            <ProgressBar x:Name="progbar" RelativePanel.Below="HeaderBorder" Height="8" IsIndeterminate="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" Foreground="{ThemeResource SystemAccentColorLight1}"/>
-            <TextBox x:Name="InfoText" Text="Welcome" RelativePanel.Below="progbar" IsHitTestVisible="False" IsReadOnly="True"  RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" Background="#FF333337" BorderBrush="#FF333337" RequestedTheme="Default" Margin="-1,1,-1,0" FontSize="12" Height="26" MinHeight="20"/>
-            <TextBlock x:Name="InfoBlock" Text="Telnet is used to connect to the Command Prompt session. Please wait while checking for access" RelativePanel.Below="InfoText" TextWrapping="Wrap" RequestedTheme="Default" Margin="10,5,10,0" />
-            <TextBlock x:Name="CMDpresent" Text="CMD Check" RelativePanel.Below="InfoBlock" RelativePanel.AlignHorizontalCenterWithPanel="True" IsColorFontEnabled="true" Foreground="#FFBBB5BB" Margin="0,10,0,0"/>
-            <TextBox x:Name="LoopText" Text="Loopback Info" RelativePanel.Below="CMDpresent" IsHitTestVisible="False" IsReadOnly="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" RequestedTheme="Default" Background="#FF333337" BorderBrush="#FF333337"  Margin="-1,10,-1,0" FontSize="12" Height="26" MinHeight="20"/>
+            <FontIcon
+                x:Name="MainIcon"
+                Width="40"
+                Height="40"
+                Margin="0,3,0,0"
+                FontFamily="Segoe MDL2 Assets"
+                Foreground="{ThemeResource SystemAccentColor}"
+                Glyph="&#xE756;" />
+            <ProgressBar
+                x:Name="progbar"
+                Height="8"
+                Foreground="{ThemeResource SystemAccentColorLight1}"
+                IsIndeterminate="True"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True"
+                RelativePanel.Below="HeaderBorder" />
+            <TextBox
+                x:Name="InfoText"
+                Height="26"
+                MinHeight="20"
+                Margin="-1,1,-1,0"
+                Background="#FF333337"
+                BorderBrush="#FF333337"
+                FontSize="12"
+                IsHitTestVisible="False"
+                IsReadOnly="True"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True"
+                RelativePanel.Below="progbar"
+                RequestedTheme="Default"
+                Text="Welcome" />
+            <TextBlock
+                x:Name="InfoBlock"
+                Margin="10,5,10,0"
+                RelativePanel.Below="InfoText"
+                RequestedTheme="Default"
+                Text="Telnet is used to connect to the Command Prompt session. Please wait while checking for access"
+                TextWrapping="Wrap" />
+            <TextBlock
+                x:Name="CMDpresent"
+                Margin="0,10,0,0"
+                Foreground="#FFBBB5BB"
+                IsColorFontEnabled="true"
+                RelativePanel.AlignHorizontalCenterWithPanel="True"
+                RelativePanel.Below="InfoBlock"
+                Text="CMD Check" />
+            <TextBox
+                x:Name="LoopText"
+                Height="26"
+                MinHeight="20"
+                Margin="-1,10,-1,0"
+                Background="#FF333337"
+                BorderBrush="#FF333337"
+                FontSize="12"
+                IsHitTestVisible="False"
+                IsReadOnly="True"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True"
+                RelativePanel.Below="CMDpresent"
+                RequestedTheme="Default"
+                Text="Loopback Info" />
 
-            <TextBlock x:Name="LoopbackInfo" Text="Loopback access enables a UWP app access to local connections (i.e CMD access on WP) and is REQUIRED for this app to work, to enable this, tap below to copy and type into CMD Injector:" RelativePanel.Below="LoopText" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" RequestedTheme="Default" TextWrapping="Wrap"  Margin="10,10,10,0"/>
-            <TextBlock x:Name="LoopCmd" TextWrapping="Wrap" Text="checknetisolation loopbackexempt -a -n=WPCommandPrompt_6dg21qtxnde1e" Tapped="LoopCmd_Tapped" RelativePanel.Below="LoopbackInfo" RelativePanel.AlignLeftWithPanel="True" HorizontalAlignment="Center" RelativePanel.AlignRightWithPanel="True" IsColorFontEnabled="True" Foreground="#FF2D89EF" Margin="0,5,0,0" FontSize="14"/>
+            <TextBlock
+                x:Name="LoopbackInfo"
+                Margin="10,10,10,0"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True"
+                RelativePanel.Below="LoopText"
+                RequestedTheme="Default"
+                Text="Loopback access enables a UWP app access to local connections (i.e CMD access on WP) and is REQUIRED for this app to work, to enable this, tap below to copy and type into CMD Injector:"
+                TextWrapping="Wrap" />
+            <TextBlock
+                x:Name="LoopCmd"
+                Margin="0,5,0,0"
+                HorizontalAlignment="Center"
+                FontSize="14"
+                Foreground="#FF2D89EF"
+                IsColorFontEnabled="True"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True"
+                RelativePanel.Below="LoopbackInfo"
+                Tapped="LoopCmd_Tapped"
+                Text="checknetisolation loopbackexempt -a -n=WPCommandPrompt_g5rj6pc6gbtrg"
+                TextWrapping="Wrap" />
 
-            <Button x:Name="FinishBtn" Click="FinishBtn_Click" Content="Finish Setup" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignLeftWithPanel="True" IsEnabled="False" RelativePanel.AlignRightWithPanel="True" RequestedTheme="Default" HorizontalAlignment="Stretch" Background="{x:Null}" Foreground="{ThemeResource SystemAccentColorLight2}" Margin="0,0,5,10"/>
+            <Button
+                x:Name="FinishBtn"
+                Margin="0,0,5,10"
+                HorizontalAlignment="Stretch"
+                Background="{x:Null}"
+                Click="FinishBtn_Click"
+                Content="Finish Setup"
+                Foreground="{ThemeResource SystemAccentColorLight2}"
+                IsEnabled="False"
+                RelativePanel.AlignBottomWithPanel="True"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True"
+                RequestedTheme="Default" />
         </RelativePanel>
     </Grid>
 </Page>
