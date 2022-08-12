@@ -20,9 +20,7 @@
                         Header="Font"
                         PlaceholderText="Select a Font"
                         SelectionChanged="ComboBox_SelectionChanged">
-                        <x:String>Cascadia Code</x:String>
-                        <x:String>Lucida Console</x:String>
-                        <x:String>Segoe UI</x:String>
+                        <x:String>Consolas</x:String>
                     </ComboBox>
                 </StackPanel>
             </PivotItem>

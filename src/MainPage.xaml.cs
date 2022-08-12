@@ -87,7 +87,7 @@ namespace Command_Prompt
             string Font = localSettings.Values["Font"] as string;
             if (Font != null)
             {
-                CMDtestText.FontFamily = new FontFamily("ms-appx://Fonts/" + Font);
+                CMDtestText.FontFamily = new FontFamily(Font);
             }
         }
         private void SendCommandBtn_Click(object sender, RoutedEventArgs e)
