@@ -1,6 +1,5 @@
 ﻿using Windows.Storage;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
 
 namespace Command_Prompt.Pages
 {

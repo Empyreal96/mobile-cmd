@@ -18,7 +18,7 @@
                             Height="64"
                             Source="ms-appx:///Assets/Square44x44Logo.targetsize-256.png" />
                         <RichTextBlock VerticalAlignment="Center">
-                            <Paragraph>mobile-cmd v0.2-beta</Paragraph>
+                            <Paragraph>mobile-cmd v0.2.1-beta</Paragraph>
                             <Paragraph>Released on Friday, 12th August 2022</Paragraph>
                         </RichTextBlock>
                     </StackPanel>
@@ -38,19 +38,18 @@
                         <Paragraph FontSize="20">Source code</Paragraph>
                         <Paragraph>
                             <Hyperlink NavigateUri="https://github.com/Empyreal96/mobile-cmd">GitHub</Hyperlink></Paragraph>
+
+                        <Paragraph FontSize="20">Dependencies</Paragraph>
+                        <Paragraph>Microsoft.NETCore.UniversalWindowsPlatform v6.2.14</Paragraph>
+                        <Paragraph>Microsoft.UI.Xaml v2.5</Paragraph>
+                        <Paragraph>Win2d v1.26.0</Paragraph>
                     </RichTextBlock>
                 </StackPanel>
             </PivotItem>
             <PivotItem Header="Changelog">
                 <RichTextBlock>
-                    <Paragraph>v0.2</Paragraph>
-                    <Paragraph>- Added check for malicious commands</Paragraph>
-                    <Paragraph>- Added Tabs</Paragraph>
-                    <Paragraph>- Added Font settings</Paragraph>
-                    <Paragraph>- Added About page</Paragraph>
-                    <Paragraph>- Fixed cls command not working</Paragraph>
-                    <Paragraph>- Fixed output of commands like bcdedit</Paragraph>
-                    <Paragraph>- Seems faster ™️</Paragraph>
+                    <Paragraph>v0.2.1</Paragraph>
+                    <Paragraph>- Allow the selection of all system available fonts</Paragraph>
                 </RichTextBlock>
             </PivotItem>
         </Pivot>
