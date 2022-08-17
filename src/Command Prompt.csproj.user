@@ -9,14 +9,14 @@
     <AppxShowAllApps>False</AppxShowAllApps>
     <AppxBuildConfigurationSelection>arm</AppxBuildConfigurationSelection>
     <PackageOptionalProjectsInIdeBuilds>False</PackageOptionalProjectsInIdeBuilds>
-    <Source>C:\Users\Empyreal96\Pictures\icons\terminal.png</Source>
-    <SmallTileSource>C:\Users\Empyreal96\Pictures\icons\terminal.png</SmallTileSource>
-    <MediumTileSource>C:\Users\Empyreal96\Pictures\icons\terminal.png</MediumTileSource>
-    <WideTileSource>C:\Users\Empyreal96\Pictures\icons\terminal.png</WideTileSource>
-    <LargeTileSource>C:\Users\Empyreal96\Pictures\icons\terminal.png</LargeTileSource>
-    <AppIconSource>C:\Users\Empyreal96\Pictures\icons\terminal.png</AppIconSource>
-    <SplashScreenSource>C:\Users\Empyreal96\Pictures\icons\terminal.png</SplashScreenSource>
-    <PackageLogoSource>C:\Users\Empyreal96\Pictures\icons\terminal.png</PackageLogoSource>
+    <Source>Z:\Repos\Backup\2022.08.14\src\Assets\Square44x44Logo.altform-unplated_targetsize-256.png</Source>
+    <SmallTileSource>Z:\Repos\Backup\2022.08.14\src\Assets\Square44x44Logo.altform-unplated_targetsize-256.png</SmallTileSource>
+    <MediumTileSource>Z:\Repos\Backup\2022.08.14\src\Assets\Square44x44Logo.altform-unplated_targetsize-256.png</MediumTileSource>
+    <WideTileSource>Z:\Repos\Backup\2022.08.14\src\Assets\Square44x44Logo.altform-unplated_targetsize-256.png</WideTileSource>
+    <LargeTileSource>Z:\Repos\Backup\2022.08.14\src\Assets\Square44x44Logo.altform-unplated_targetsize-256.png</LargeTileSource>
+    <AppIconSource>Z:\Repos\Backup\2022.08.14\src\Assets\Square44x44Logo.altform-unplated_targetsize-256.png</AppIconSource>
+    <SplashScreenSource>Z:\Repos\Backup\2022.08.14\src\Assets\Square44x44Logo.altform-unplated_targetsize-256.png</SplashScreenSource>
+    <PackageLogoSource>Z:\Repos\Backup\2022.08.14\src\Assets\Square44x44Logo.altform-unplated_targetsize-256.png</PackageLogoSource>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
     <DeviceId>30f105c9-681e-420b-a277-7c086ead8a4e</DeviceId>

@@ -1,6 +1,6 @@
 ﻿using Windows.UI.Xaml.Controls;
 
-namespace Command_Prompt.Pages
+namespace MobileTerminal.Pages
 {
     public sealed partial class Help : Page
     {

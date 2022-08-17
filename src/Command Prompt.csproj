@@ -7,8 +7,8 @@
     <ProjectGuid>{581F8149-D518-4CD8-8BEB-929820259AC7}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Command_Prompt</RootNamespace>
-    <AssemblyName>Command Prompt</AssemblyName>
+    <RootNamespace>MobileTerminal</RootNamespace>
+    <AssemblyName>MobileTerminalUWP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.22621.0</TargetPlatformVersion>
@@ -108,6 +108,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
+    <Optimize>true</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -128,14 +129,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Exceptions.cs" />
+    <Compile Include="Classes\Tools.cs" />
+    <Compile Include="Classes\Exceptions.cs" />
     <Compile Include="FirstRunPage.xaml.cs">
       <DependentUpon>FirstRunPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Globals.cs" />
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Classes\Globals.cs" />
     <Compile Include="Pages\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
@@ -146,10 +145,16 @@
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TabsPage.xaml.cs">
-      <DependentUpon>TabsPage.xaml</DependentUpon>
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TelnetClient.cs" />
+    <Compile Include="Classes\TelnetClient.cs" />
+    <Compile Include="Terminals\cmd.xaml.cs">
+      <DependentUpon>cmd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Terminals\pwsh.xaml.cs">
+      <DependentUpon>pwsh.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -161,6 +166,7 @@
     <Content Include="Assets\LargeTile.scale-125.png" />
     <Content Include="Assets\LargeTile.scale-150.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
+    <Content Include="Assets\LargeTile.scale-400.png" />
     <Content Include="Assets\SmallTile.scale-100.png" />
     <Content Include="Assets\SmallTile.scale-125.png" />
     <Content Include="Assets\SmallTile.scale-150.png" />
@@ -174,6 +180,11 @@
     <Content Include="Assets\Square150x150Logo.scale-125.png" />
     <Content Include="Assets\Square150x150Logo.scale-150.png" />
     <Content Include="Assets\Square150x150Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-48.png" />
     <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-16.png" />
     <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-256.png" />
     <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-32.png" />
@@ -213,10 +224,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Pages\About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -229,9 +236,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TabsPage.xaml">
+    <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Terminals\cmd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Terminals\pwsh.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Telnet
+namespace MobileTerminal.Classes
 {
     public class TelnetClient : IDisposable
     {
@@ -157,7 +157,7 @@ namespace Telnet
                 // Fire-and-forget looping task that waits for messages to arrive
                 try
                 {
-                    WaitForMessage();
+                    await WaitForMessage();
                 }
                 catch (Exception e)
                 {

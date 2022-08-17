@@ -1,13 +1,16 @@
-﻿using System;
+﻿using MobileTerminal.Classes;
+using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation.Collections;
 using Windows.Storage;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace Command_Prompt
+namespace MobileTerminal
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
@@ -31,6 +34,8 @@ namespace Command_Prompt
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -63,7 +68,7 @@ namespace Command_Prompt
                     if (roamingProperties.ContainsKey("FirstRunDone"))
                     {
                         // The normal case
-                        rootFrame.Navigate(typeof(TabsPage), e.Arguments);
+                        rootFrame.Navigate(typeof(MainPage), e.Arguments);
                     }
                     else
                     {
@@ -75,6 +80,12 @@ namespace Command_Prompt
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
+        }
+
+        private void OnBackRequested(object sender, BackRequestedEventArgs e)
+        {
+            e.Handled = true;
+            Tools.ExitApp();
         }
 
         /// <summary>

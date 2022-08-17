@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Popups;
 
-namespace Command_Prompt
+namespace MobileTerminal.Classes
 {
     class Exceptions
     {

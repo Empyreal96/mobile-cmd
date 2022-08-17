@@ -1,6 +1,6 @@
-﻿using System;
+﻿using MobileTerminal.Classes;
+using System;
 using System.Threading;
-using Telnet;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -12,7 +12,7 @@ using Windows.UI.Xaml.Media;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace Command_Prompt
+namespace MobileTerminal
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -75,7 +75,7 @@ namespace Command_Prompt
             {
 
                 await client.Connect();
-              //  await Task.Delay(1000);
+                //  await Task.Delay(1000);
                 await client.Send($"set");
                 IsCMDPresent = true;
 
@@ -114,7 +114,7 @@ namespace Command_Prompt
         {
             //await ApplicationData.Current.LocalFolder.CreateFileAsync("FirstRunComplete.txt", CreationCollisionOption.ReplaceExisting);
             roamingProperties["FirstRunDone"] = bool.TrueString;
-            this.Frame.Navigate(typeof(TabsPage));
+            this.Frame.Navigate(typeof(MainPage));
         }
 
         private void LoopCmd_Tapped(object sender, TappedRoutedEventArgs e)

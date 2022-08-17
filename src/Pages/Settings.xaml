@@ -1,10 +1,10 @@
 ﻿<Page
-    x:Class="Command_Prompt.Pages.Settings"
+    x:Class="MobileTerminal.Pages.Settings"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="using:Command_Prompt.Pages"
+    xmlns:local="using:MobileTerminal.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
@@ -13,7 +13,7 @@
         <Pivot>
             <PivotItem Header="Apperance">
                 <StackPanel>
-                    <TextBlock Foreground="Red">To apply these settings you need to restart mobile-cmd</TextBlock>
+                    <TextBlock Foreground="Red">Restart Terminal to apply settings</TextBlock>
                     <ComboBox
                         x:Name="FontSelection"
                         Width="200"
