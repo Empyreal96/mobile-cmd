@@ -1,29 +1,9 @@
-﻿using System;
-using System.IO;
-using Windows.ApplicationModel.Core;
-using Windows.UI.Core;
-using Windows.UI.Xaml.Controls;
+﻿using System.IO;
 
 namespace MobileTerminal.Classes
 {
     class Tools
     {
-        //Go Back Handler
-        public static EventHandler GoBackHandler;
-
-        public static bool IsFileAccessable(string file)
-        {
-            try
-            {
-                using (var stream = File.OpenRead(file))
-                    return false;
-            }
-            catch (IOException)
-            {
-                return true;
-            }
-        }
-
         public static bool CheckForMaliciousCommand(string command)
         {
             if (command.Contains("\\.\\globalroot\\device\\condrv\\kernelconnect") || command.Contains("%0|%0"))
@@ -36,35 +16,16 @@ namespace MobileTerminal.Classes
             }
         }
 
-        public static async void ShowDialog(string title, string content)
+        public static bool IsFileAccessable(string file)
         {
-            ContentDialog dialog = new ContentDialog
+            try
             {
-                Title = title,
-                Content = content,
-                PrimaryButtonText = "Okay",
-                DefaultButton = ContentDialogButton.Primary
-            };
-
-            await dialog.ShowAsync();
-        }
-
-        public static async void ExitApp()
-        {
-            ContentDialog dialog = new ContentDialog
+                using (var stream = File.OpenRead(file))
+                    return false;
+            }
+            catch (IOException)
             {
-                Title = "Question",
-                Content = "Do you really want to exit Terminal?",
-                PrimaryButtonText = "Yes",
-                SecondaryButtonText = "No",
-                DefaultButton = ContentDialogButton.Primary
-            };
-
-            var result = await dialog.ShowAsync();
-
-            if (result == ContentDialogResult.Primary)
-            {
-                CoreApplication.Exit();
+                return true;
             }
         }
     }

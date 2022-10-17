@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -49,7 +47,7 @@ namespace MobileTerminal.Classes
         /// You cannot call this method twice; if you need to reconnect, dispose of this instance and create a new one.
         /// </summary>
         /// <returns></returns>
-        public async Task Connect(string TelnetIP = "127.0.0.1")
+        public async Task Connect()
         {
             if (_tcpClient != null)
             {
@@ -58,7 +56,7 @@ namespace MobileTerminal.Classes
             }
 
             _tcpClient = new TcpClient();
-            await _tcpClient.ConnectAsync(TelnetIP, _port);
+            await _tcpClient.ConnectAsync(Globals.TelnetIP, _port);
 
             _tcpReader = new StreamReader(_tcpClient.GetStream());
             _tcpWriter = new StreamWriter(_tcpClient.GetStream()) { AutoFlush = true };

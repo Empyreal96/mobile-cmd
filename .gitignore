@@ -3,3 +3,4 @@ src/AppPackages
 src/bin
 src/obj
 src/BundleArtifacts
+src/MobileTerminal_TemporaryKey.pfx

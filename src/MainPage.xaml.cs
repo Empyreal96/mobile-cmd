@@ -1,10 +1,9 @@
 ﻿using Microsoft.UI.Xaml.Controls;
-using MobileTerminal.Classes;
+using PenguinApps.Core.OSS;
 using System;
-using Windows.Foundation.Metadata;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using MobileTerminal.Classes;
 
 namespace MobileTerminal
 {
@@ -13,26 +12,17 @@ namespace MobileTerminal
         public MainPage()
         {
             this.InitializeComponent();
-            HideStatusBar();
-        }
-
-        private async void HideStatusBar()
-        {
-            // Hide the status bar
-            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
-            {
-                await StatusBar.GetForCurrentView().HideAsync();
-            }
+            WindowManager.EnterFullScreen(true);
         }
 
         private void TabView_Loaded(object sender, RoutedEventArgs e)
         {
-            CreateNewTab("cmd", "Terminals.cmd", Symbol.Document);
+            NewLocalTab();
         }
 
         private void TabView_AddButtonClick(TabView sender, object args)
         {
-            CreateNewTab("cmd", "Terminals.cmd", Symbol.Document);
+            NewLocalTab();
         }
 
         private void TabView_TabCloseRequested(TabView sender, TabViewTabCloseRequestedEventArgs args)
@@ -41,14 +31,30 @@ namespace MobileTerminal
             GC.Collect();
         }
 
-        private void NewCMDTab(object sender, RoutedEventArgs e)
+        private async void NewWindow(object sender, RoutedEventArgs e)
         {
-            CreateNewTab("cmd", "Terminals.cmd", Symbol.Document);
+            await WindowManager.OpenPageAsNewWindowAsync(typeof(MainPage));
         }
 
-        private void NewPWSHTab(object sender, RoutedEventArgs e)
+        private void NewLocalTab()
         {
-            CreateNewTab("PowerShell", "Terminals.pwsh", Symbol.Document);
+            Globals.TelnetIP = "127.0.0.1";
+            CreateNewTab("Terminal (Local)", "Pages.Terminal", Symbol.Document);
+        }
+        private void NewLocalTab(object sender, RoutedEventArgs e)
+        {
+            NewLocalTab();
+        }
+
+        private void OpenRemoteConnectionDialog(object sender, RoutedEventArgs e)
+        {
+            RemoteConnectionDialog.Visibility = Visibility.Visible;
+        }
+        private void NewRemoteTab(object sender, RoutedEventArgs e)
+        {
+            RemoteConnectionDialog.Visibility = Visibility.Collapsed;
+            Globals.TelnetIP = IPAddressBox.Text;
+            CreateNewTab("Terminal (Remote)", "Pages.Terminal", Symbol.Document);
         }
 
         private void OpenSettings(object sender, RoutedEventArgs e)
@@ -67,7 +73,7 @@ namespace MobileTerminal
 
         private void CloseTerminal(object sender, RoutedEventArgs e)
         {
-            Tools.ExitApp();
+            RuntimeManager.ExitApp();
         }
 
         private void CreateNewTab(string header, object pageTag, Symbol icon)

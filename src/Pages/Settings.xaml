@@ -14,11 +14,11 @@
             <PivotItem Header="Apperance">
                 <StackPanel>
                     <TextBlock Foreground="Red">Restart Terminal to apply settings</TextBlock>
+                    <ToggleSwitch x:Name="SendBtnSwitch" Header="Hide send button (you can still execute commands by pressing enter)" Toggled="SendBtnSwitch_Toggled"/>
                     <ComboBox
                         x:Name="FontSelection"
                         Width="200"
                         Header="Font"
-                        PlaceholderText="Select a Font"
                         SelectionChanged="ComboBox_SelectionChanged" />
                 </StackPanel>
             </PivotItem>

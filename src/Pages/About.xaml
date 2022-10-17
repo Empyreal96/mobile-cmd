@@ -17,10 +17,9 @@
                             <Image
                                 Width="64"
                                 Height="64"
-                                Source="ms-appx:///Assets/Square44x44Logo.targetsize-256.png" />
+                                Source="ms-appx:///Assets/Square44x44Logo.png" />
                             <RichTextBlock VerticalAlignment="Center">
-                                <Paragraph>Mobile Terminal v0.3-beta</Paragraph>
-                                <Paragraph>Released on Wednesday, 17th August 2022</Paragraph>
+                                <Paragraph>Mobile Terminal v0.4.0</Paragraph>
                             </RichTextBlock>
                         </StackPanel>
                         <RichTextBlock>
@@ -45,6 +44,7 @@
                             <Paragraph FontSize="20">Dependencies</Paragraph>
                             <Paragraph>Microsoft.NETCore.UniversalWindowsPlatform v6.2.14</Paragraph>
                             <Paragraph>Microsoft.UI.Xaml v2.5</Paragraph>
+                            <Paragraph>PenguinApps.Core.OSS v1.0</Paragraph>
                             <Paragraph>Win2D v1.26.0</Paragraph>
                         </RichTextBlock>
                     </StackPanel>
@@ -52,14 +52,10 @@
             </PivotItem>
             <PivotItem Header="Changelog">
                 <RichTextBlock>
-                    <Paragraph>v0.3</Paragraph>
-                    <Paragraph>- Added new tab to menu</Paragraph>
-                    <Paragraph>- Added PowerShell</Paragraph>
-                    <Paragraph>- Added Quit app when hitting back button</Paragraph>
-                    <Paragraph>- Added Quit app in menu</Paragraph>
-                    <Paragraph>- Code cleanup</Paragraph>
-                    <Paragraph>- Rename app to Mobile Terminal</Paragraph>
-                    <Paragraph>- Other smaller changes</Paragraph>
+                    <Paragraph>v0.4</Paragraph>
+                    <Paragraph>- Added support for remote connections (preview)</Paragraph>
+                    <Paragraph>- Merge CMD mode and PowerShell with Hybrid mode</Paragraph>
+                    <Paragraph>- Various bug fixes</Paragraph>
                 </RichTextBlock>
             </PivotItem>
         </Pivot>

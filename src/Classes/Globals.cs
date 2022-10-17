@@ -2,7 +2,7 @@
 {
     class Globals
     {
-        public static ulong ReportedBuildVersion { get; set; }
-        public static string FullBuildNumber { get; set; }
+        public static string TelnetIP { get; set; }
+        public static bool CommandRunning { get; set; }
     }
 }

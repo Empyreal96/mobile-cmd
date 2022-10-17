@@ -9,13 +9,13 @@
   <Identity
     Name="WPCommandPrompt"
     Publisher="CN=Pinguin2001"
-    Version="0.3.0.0" />
+    Version="0.4.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="7c02d3dd-afe8-4c25-a609-a888b4adf4f7" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>Terminal</DisplayName>
-    <PublisherDisplayName>Empyreal96</PublisherDisplayName>
+    <DisplayName>MobileTerminal</DisplayName>
+    <PublisherDisplayName>Pinguin2001</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -32,20 +32,18 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="MobileTerminal.App">
       <uap:VisualElements
-        DisplayName="Terminal"
+        DisplayName="MobileTerminal"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="Command Prompt for WIndows 10 Mobile"
+        Description="MobileTerminal"
         BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png" ShortName="Terminal">
-          <uap:ShowNameOnTiles>
-            <uap:ShowOn Tile="square150x150Logo"/>
-            <uap:ShowOn Tile="wide310x150Logo"/>
-            <uap:ShowOn Tile="square310x310Logo"/>
-          </uap:ShowNameOnTiles>
-        </uap:DefaultTile >
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
     </Application>
   </Applications>
+
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
 </Package>

@@ -1,4 +1,5 @@
 ﻿using MobileTerminal.Classes;
+using PenguinApps.Core.OSS;
 using System;
 using System.IO;
 using System.Threading;
@@ -8,26 +9,33 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
-namespace MobileTerminal.Terminals
+namespace MobileTerminal.Pages
 {
-    public sealed partial class pwsh : Page
+    public sealed partial class Terminal : Page
     {
         private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         string LocalPath = ApplicationData.Current.LocalFolder.Path;
         static CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         TelnetClient client = new TelnetClient(TimeSpan.FromSeconds(1), cancellationTokenSource.Token);
-        public pwsh()
+        public Terminal()
         {
             this.InitializeComponent();
-            GetSettings();
-            ApplicationData.Current.LocalFolder.CreateFileAsync("cmdstring.txt", CreationCollisionOption.ReplaceExisting);
             try
             {
-                Connect();
+                GetSettings();
+                try
+                {
+                    Connect();
+                }
+                catch (Exception ex)
+                {
+                    ExceptionHelper.ThrowFullError(ex);
+
+                }
             }
             catch (Exception ex)
             {
-                Exceptions.ThrowFullError(ex);
+                ExceptionHelper.ThrowFullError(ex);
             }
         }
 
@@ -39,89 +47,103 @@ namespace MobileTerminal.Terminals
                 CMDtestText.Text = $"Connecting to device...";
                 await client.Connect();
                 await client.Send($"echo %CD%^> > \"{LocalPath}\\cmdstring.txt\" 2>&1");
-                string results = File.ReadAllText($"{LocalPath}\\cmdstring.txt");
+                string currentpath = File.ReadAllText($"{LocalPath}\\cmdstring.txt");
                 CMDtestText.Text =
-                    $"mobile-pwsh v0.1-beta\n" +
-                    $"Windows PowerShell\n" +
-                    $"Copyright (C) Microsoft Corporation. All rights reserved.\n" +
-                    $"\nPS {results}";
+                    $"Mobile Terminal v0.4 (Hybrid mode)\n" +
+                    $"\n{currentpath}";
                 BlockTextInput(false);
             }
             catch (Exception ex)
             {
-                Exceptions.ThrowFullError(ex);
+                ExceptionHelper.ThrowFullError(ex);
             }
         }
 
         private void GetSettings()
         {
-            ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+            if (localSettings.Values["HideSendBtn"] as string == "true")
+            {
+                SendCommandBtn.Visibility = Visibility.Collapsed;
+            }
             if (localSettings.Values["Font"] is string Font)
             {
                 CMDtestText.FontFamily = new FontFamily(Font);
                 SendCommandText.FontFamily = new FontFamily(Font);
             }
         }
+        private void SendCommandText_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                SendCommandText.Focus(FocusState.Programmatic);
+                SendCommand();
+            }
+        }
         private void SendCommandBtn_Click(object sender, RoutedEventArgs e)
         {
-            // Prevent two commands running at the same time in different tabs
-            string CommandRunning = localSettings.Values["CommandRunning"] as string;
-            if (CommandRunning == "true")
-            {
-                Exceptions.CustomMessage("You cannot run two commands at the same time");
-            }
-            else
-            {
-                // Change "CommandRunning" to "true" to prevent another command from running
-                localSettings.Values["CommandRunning"] = "true";
-                // Block text input
-                BlockTextInput(true);
-                var text = CMDtestText.Text;
-                CMDtestText.Text = text.Remove(text.Length - 2);
-                // Write command to UI
-                CMDtestText.Text += $"{SendCommandText.Text}\n";
-                // Check if command is malicious and if it isnt run the command
-                bool IsCommandMalicious = Tools.CheckForMaliciousCommand(SendCommandText.Text);
-                if (!IsCommandMalicious)
-                {
-                    SendCommand();
-                    // Clear Text input
-                    SendCommandText.Text = "";
-                }
-                else
-                {
-                    CMDtestText.Text += "Command aborted. The command you tried to run is malicious";
-
-                }
-                // Remove text input block
-                BlockTextInput(false);
-                // Change "CommandRunning" to false, since the command now finish running
-                localSettings.Values["CommandRunning"] = "false";
-            }
+            SendCommand();
         }
 
         private async void SendCommand()
         {
-            string command = SendCommandText.Text;
-            if (command.Length != 0)
+            // Prevent two commands running at the same time in different tabs
+            if (Globals.CommandRunning)
             {
-                if (command == "cls" || command == "clear")
+                UI.ShowDialog("Error", "You cannot run two commands at the same time");
+            }
+            else
+            {
+                string command = SendCommandText.Text;
+                // Change "CommandRunning" to "true" to prevent another command from running
+                Globals.CommandRunning = true;
+                // Block text input
+                BlockTextInput(true);
+                // Clear text input
+                ClearTextInput();
+                var text = CMDtestText.Text;
+                CMDtestText.Text = text.Remove(text.Length - 2);
+                // Write command to UI
+                CMDtestText.Text += $"{command}\n";
+                // Check if command is malicious and if it isnt run the command
+                bool IsCommandMalicious = Tools.CheckForMaliciousCommand(command);
+                if (!IsCommandMalicious)
                 {
-                    CMDtestText.Text = "";
-                    await ShowCurrentPath();
-                }
-                else if (command.StartsWith("cd"))
-                {
-                    await client.Send($"{command} > \"{LocalPath}\\cmdstring.txt\" 2>&1");
-                    TestIfFileAccessable();
+                    if (command.Length != 0)
+                    {
+                        if (command == "cls")
+                        {
+                            CMDtestText.Text = "";
+                            await ShowCurrentPath();
+                        }
+                        if (command == "exit")
+                        {
+                            RuntimeManager.ExitApp();
+                            await ShowCurrentPath();
+                        }
+                        else
+                        {
+                            if (!command.StartsWith("PS "))
+                            {
+                                // Run CMD command
+                                await client.Send($"{command} > \"{LocalPath}\\cmdstring.txt\" 2>&1");
+                            }
+                            else
+                            {
+                                // Run PS command
+                                int n = 3;
+                                string pwshcommand = command.Remove(0, n);
+                                await client.Send($"PowerShell.exe -Command {pwshcommand} > \"{LocalPath}\\cmdstring.txt\" 2>&1");
+                            }
+                            TestIfFileAccessable();
+                        }
+                    }
                 }
                 else
                 {
-                    string pwshcommand = '"' + command + '"';
-                    // send command
-                    await client.Send($"PowerShell.exe -Command {pwshcommand} > \"{LocalPath}\\cmdstring.txt\" 2>&1");
-                    TestIfFileAccessable();
+                    CMDtestText.Text += "Command aborted. The command you tried to run is malicious";
                 }
+                // Change "CommandRunning" to false, since the command now finish running
+                Globals.CommandRunning = false;
             }
         }
 
@@ -160,14 +182,14 @@ namespace MobileTerminal.Terminals
             }
             catch (Exception ex)
             {
-                Exceptions.ThrowFullError(ex);
+                ExceptionHelper.ThrowFullError(ex);
             }
         }
 
         private async Task ShowCurrentPath()
         {
             // Show current path
-            await client.Send($"echo PS %CD%^> > \"{LocalPath}\\cmdstring.txt\" 2>&1");
+            await client.Send($"echo %CD%^> > \"{LocalPath}\\cmdstring.txt\" 2>&1");
             string currentpath = File.ReadAllText($"{LocalPath}\\cmdstring.txt");
             CMDtestText.Text += "\n\n" + $"{currentpath}";
         }
@@ -178,13 +200,13 @@ namespace MobileTerminal.Terminals
             {
                 if (enable == true)
                 {
-                    SendCommandText.IsEnabled = false;
+                    SendCommandText.PlaceholderText = "Processing...";
                     CMDtestText.IsHitTestVisible = false;
                     SendCommandBtn.IsEnabled = false;
                 }
                 else
                 {
-                    SendCommandText.IsEnabled = true;
+                    SendCommandText.PlaceholderText = "Enter command here";
                     CMDtestText.IsHitTestVisible = true;
                     SendCommandBtn.IsEnabled = true;
                     SendCommandText.Focus(FocusState.Programmatic);
@@ -193,8 +215,20 @@ namespace MobileTerminal.Terminals
             }
             catch (Exception ex)
             {
-                Exceptions.ThrowFullError(ex);
+                ExceptionHelper.ThrowFullError(ex);
             }
+        }
+
+        private void ClearTextInput()
+        {
+            // Clear Text input
+            SendCommandText.Text = "";
+        }
+
+        private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            int currentheight = Convert.ToInt32(((Frame)Window.Current.Content).ActualHeight);
+            CMDtestText.Height = Convert.ToDouble(currentheight - 75);
         }
     }
 }

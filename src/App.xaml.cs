@@ -2,9 +2,6 @@
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.ApplicationModel.Core;
-using Windows.Foundation.Collections;
-using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -35,7 +32,6 @@ namespace MobileTerminal
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
             SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
-
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -63,29 +59,11 @@ namespace MobileTerminal
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-
-                    IPropertySet roamingProperties = ApplicationData.Current.RoamingSettings.Values;
-                    if (roamingProperties.ContainsKey("FirstRunDone"))
-                    {
-                        // The normal case
-                        rootFrame.Navigate(typeof(MainPage), e.Arguments);
-                    }
-                    else
-                    {
-                        // The first-time case
-                        rootFrame.Navigate(typeof(FirstRunPage), e.Arguments);
-                    }
-
+                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
-        }
-
-        private void OnBackRequested(object sender, BackRequestedEventArgs e)
-        {
-            e.Handled = true;
-            Tools.ExitApp();
         }
 
         /// <summary>
@@ -110,6 +88,12 @@ namespace MobileTerminal
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        private void OnBackRequested(object sender, BackRequestedEventArgs e)
+        {
+            e.Handled = true;
+            RuntimeManager.ExitApp();
         }
     }
 }

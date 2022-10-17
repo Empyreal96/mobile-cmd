@@ -1,4 +1,5 @@
-﻿using Windows.Storage;
+﻿using MobileTerminal.Classes;
+using Windows.Storage;
 using Windows.UI.Xaml.Controls;
 
 namespace MobileTerminal.Pages
@@ -15,10 +16,19 @@ namespace MobileTerminal.Pages
 
         private void GetSettings()
         {
+            string IsSendBtnHidden = localSettings.Values["HideSendBtn"] as string;
+            if (IsSendBtnHidden == "true")
+            {
+                SendBtnSwitch.IsOn = true;
+            }
             string Font = localSettings.Values["Font"] as string;
             if (Font != null)
             {
-                FontSelection.SelectedItem = Font;
+                FontSelection.PlaceholderText = Font;
+            }
+            else
+            {
+                FontSelection.PlaceholderText = "Select a font...";
             }
         }
 
@@ -28,10 +38,23 @@ namespace MobileTerminal.Pages
             FontSelection.ItemsSource = fonts;
         }
 
+        private void SendBtnSwitch_Toggled(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            if (SendBtnSwitch.IsOn == true)
+            {
+                localSettings.Values["HideSendBtn"] = "true";
+            }
+            else
+            {
+                localSettings.Values["HideSendBtn"] = "false";
+            }
+        }
+
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string Font = e.AddedItems[0].ToString();
             localSettings.Values["Font"] = Font;
         }
+
     }
 }
