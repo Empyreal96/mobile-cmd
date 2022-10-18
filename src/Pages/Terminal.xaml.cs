@@ -20,6 +20,7 @@ namespace MobileTerminal.Pages
         public Terminal()
         {
             this.InitializeComponent();
+            ApplicationData.Current.LocalFolder.CreateFileAsync("cmdstring.txt", CreationCollisionOption.ReplaceExisting);
             try
             {
                 GetSettings();
