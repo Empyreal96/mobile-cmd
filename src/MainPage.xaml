@@ -2,12 +2,12 @@
     x:Class="MobileTerminal.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:MobileTerminal"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:MobileTerminal"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    mc:Ignorable="d">
 
     <Grid>
         <muxc:TabView
@@ -31,7 +31,7 @@
                                 <MenuFlyoutItem Click="NewLocalTab" Text="CMD/PWSH (Local)" />
                                 <MenuFlyoutItem Click="OpenRemoteConnectionDialog" Text="CMD/PWSH  (Remote)" />
                             </MenuFlyoutSubItem>
-                            <MenuFlyoutItem Text="New window" Click="NewWindow">
+                            <MenuFlyoutItem Click="NewWindow" Text="New window">
                                 <MenuFlyoutItem.Icon>
                                     <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE17C;" />
                                 </MenuFlyoutItem.Icon>
@@ -61,8 +61,27 @@
                     </Button.Flyout>
                 </Button>
             </muxc:TabView.TabStripHeader>
+            <muxc:TabView.TabStripFooter>
+                <Button
+                    Height="30"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Right"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Click="Button_Click">
+                    <SymbolIcon Symbol="Cancel" />
+                </Button>
+            </muxc:TabView.TabStripFooter>
         </muxc:TabView>
-        <StackPanel x:Load="False" x:Name="RemoteConnectionDialog" Padding="20" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" BorderBrush="{ThemeResource SystemControlHighlightAccentBrush}" BorderThickness="2">
+        <StackPanel
+            x:Name="RemoteConnectionDialog"
+            Padding="20"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            x:Load="False"
+            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+            BorderBrush="{ThemeResource SystemControlHighlightAccentBrush}"
+            BorderThickness="2">
             <TextBlock Foreground="Red">SSH connections are unsupported,</TextBlock>
             <TextBlock Foreground="Red">you can only connect to other W10M-devices with cmd injected</TextBlock>
             <TextBox x:Name="IPAddressBox" PlaceholderText="Enter ip address" />

@@ -36,7 +36,7 @@ namespace MobileTerminal
             await WindowManager.OpenPageAsNewWindowAsync(typeof(MainPage));
         }
 
-        private void NewLocalTab()
+        public void NewLocalTab()
         {
             Globals.TelnetIP = "127.0.0.1";
             CreateNewTab("Terminal (Local)", "Pages.Terminal", Symbol.Document);
@@ -78,10 +78,11 @@ namespace MobileTerminal
 
         private void CreateNewTab(string header, object pageTag, Symbol icon)
         {
-            TabViewItem newItem = new TabViewItem();
-
-            newItem.Header = header;
-            newItem.IconSource = new Microsoft.UI.Xaml.Controls.SymbolIconSource() { Symbol = icon };
+            TabViewItem newItem = new TabViewItem
+            {
+                Header = header,
+                IconSource = new Microsoft.UI.Xaml.Controls.SymbolIconSource() { Symbol = icon }
+            };
 
             Frame frame = new Frame();
             newItem.Content = frame;
@@ -89,6 +90,11 @@ namespace MobileTerminal
 
             Tabs.TabItems.Add(newItem);
             Tabs.SelectedItem = newItem;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            RuntimeManager.ExitApp();
         }
     }
 }

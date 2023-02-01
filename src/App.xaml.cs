@@ -1,5 +1,6 @@
 ﻿using MobileTerminal.Classes;
 using System;
+using System.Net.Http;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Core;
@@ -22,6 +23,37 @@ namespace MobileTerminal
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+        }
+
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            ProtocolActivatedEventArgs eventArgs = args as ProtocolActivatedEventArgs;
+
+            if (args.Kind == ActivationKind.Protocol)
+            {
+                // TODO: Handle URI activation
+                // The received URI is eventArgs.Uri.AbsoluteUri
+                Frame rootFrame = Window.Current.Content as Frame;
+                var uri = eventArgs.Uri.ToString();
+                Globals.LaunchCommand = uri.Replace("cmd:", "");
+                // Do not repeat app initialization when the Window already has content,
+                // just ensure that the window is active
+                if (rootFrame == null)
+                {
+                    // Create a Frame to act as the navigation context and navigate to the first page
+                    rootFrame = new Frame();
+                    rootFrame.NavigationFailed += OnNavigationFailed;
+                    rootFrame.Navigate(typeof(MainPage));
+                    // Place the frame in the current Window
+                    Window.Current.Content = rootFrame;
+                }
+                else
+                {
+                    Globals.MainPageContent.NewLocalTab();
+                }
+                // Ensure the current window is active
+                Window.Current.Activate();
+            }
         }
 
         /// <summary>

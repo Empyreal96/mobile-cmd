@@ -53,6 +53,24 @@ namespace MobileTerminal.Pages
                     $"Mobile Terminal v0.4 (Hybrid mode)\n" +
                     $"\n{currentpath}";
                 BlockTextInput(false);
+                if (Globals.LaunchCommand != null)
+                {
+                    ContentDialog dialog = new ContentDialog
+                    {
+                        Title = "Execute command?",
+                        Content = "A application requested to execute this code:" + Environment.NewLine + Globals.LaunchCommand + Environment.NewLine + "Do NOT execute malicious code or you might break your device!",
+                        PrimaryButtonText = "No",
+                        SecondaryButtonText = "Yes, I understand the risks",
+                        DefaultButton = ContentDialogButton.Primary
+                    };
+
+                    var result = await dialog.ShowAsync();
+                    if (result == ContentDialogResult.Secondary)
+                    {
+                        SendCommand(Globals.LaunchCommand);
+                    }
+                    Globals.LaunchCommand = null;
+                }
             }
             catch (Exception ex)
             {
@@ -76,25 +94,25 @@ namespace MobileTerminal.Pages
         {
             if (e.Key == Windows.System.VirtualKey.Enter)
             {
+                var textbox = sender as TextBox;
                 SendCommandText.Focus(FocusState.Programmatic);
-                SendCommand();
+                SendCommand(textbox.Text);
             }
         }
         private void SendCommandBtn_Click(object sender, RoutedEventArgs e)
         {
-            SendCommand();
+            SendCommand(SendCommandText.Text);
         }
 
-        private async void SendCommand()
+        private async void SendCommand(string command)
         {
             // Prevent two commands running at the same time in different tabs
             if (Globals.CommandRunning)
             {
-                UI.ShowDialog("Error", "You cannot run two commands at the same time");
+                await UI.ShowDialog("Error", "You cannot run two commands at the same time");
             }
             else
             {
-                string command = SendCommandText.Text;
                 // Change "CommandRunning" to "true" to prevent another command from running
                 Globals.CommandRunning = true;
                 // Block text input

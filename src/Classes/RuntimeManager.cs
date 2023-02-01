@@ -10,7 +10,7 @@ namespace MobileTerminal.Classes
         {
             ContentDialog dialog = new ContentDialog
             {
-                Title = "Question",
+                Title = "Close app?",
                 Content = "Do you really want to exit Terminal?",
                 PrimaryButtonText = "Yes",
                 SecondaryButtonText = "No",
