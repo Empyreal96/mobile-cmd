@@ -155,6 +155,8 @@ namespace MobileTerminal.Pages
                             }
                             TestIfFileAccessable();
                         }
+
+                        Json.AddItemToJson("History.json", command, "2023");
                     }
                 }
                 else
@@ -175,7 +177,7 @@ namespace MobileTerminal.Pages
             }
             else
             {
-                await Task.Delay(500);
+                await Task.Delay(1000);
                 TestIfFileAccessable();
             }
         }

@@ -57,6 +57,12 @@ namespace MobileTerminal
             CreateNewTab("Terminal (Remote)", "Pages.Terminal", Symbol.Document);
         }
 
+
+        private void OpenHistory(object sender, RoutedEventArgs e)
+        {
+            CreateNewTab("History", "Pages.CommandHistory", Symbol.Placeholder);
+        }
+
         private void OpenSettings(object sender, RoutedEventArgs e)
         {
             CreateNewTab("Settings", "Pages.Settings", Symbol.Setting);

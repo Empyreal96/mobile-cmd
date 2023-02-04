@@ -1,10 +1,13 @@
 ﻿using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
+using Windows.Storage;
+using System.Collections.Generic;
 
 namespace MobileTerminal.Classes
 {
     class Globals
     {
+        public static StorageFolder localFolder = ApplicationData.Current.LocalFolder;
         public static string TelnetIP { get; set; }
         public static bool CommandRunning { get; set; }
 
@@ -15,5 +18,13 @@ namespace MobileTerminal.Classes
         {
             get { return (Window.Current.Content as Frame)?.Content as MainPage; }
         }
+
+        public class JsonItems
+        {
+            public string Command { get; set; }
+            public string ExecutionTimeDate { get; set; }
+        }
+
+        public static List<JsonItems> JsonItemsList;
     }
 }
