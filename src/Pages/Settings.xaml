@@ -14,29 +14,31 @@
             <PivotItem Header="Apperance">
                 <StackPanel>
                     <TextBlock Foreground="Red">Restart Terminal to apply settings</TextBlock>
-                    <ToggleSwitch
-                        x:Name="SendBtnSwitch"
-                        Header="Hide send button (you can still execute commands by pressing enter)"
-                        Toggled="SendBtnSwitch_Toggled" />
+                    <ToggleSwitch x:Name="SendBtnSwitch" Header="Hide send button (you can still execute commands by pressing enter)" />
                     <controls:NumberBox
                         x:Name="FontSizeSelection"
                         Header="Font size"
                         SmallChange="1"
-                        SpinButtonPlacementMode="Inline"
-                        ValueChanged="FontSizeSelection_ValueChanged" />
+                        SpinButtonPlacementMode="Inline" />
                     <ComboBox
                         x:Name="FontSelection"
                         Width="200"
                         Header="Font"
+                        Loaded="FontSelection_Loaded"
                         SelectionChanged="FontSelection_SelectionChanged" />
                 </StackPanel>
             </PivotItem>
             <PivotItem Header="History">
                 <StackPanel>
                     <Button
-                        Click="Button_Click"
+                        x:Name="ClearHistoryBtn"
                         Content="Clear history"
                         Tag="ClearHistory" />
+                </StackPanel>
+            </PivotItem>
+            <PivotItem Header="Startup">
+                <StackPanel>
+                    <ToggleSwitch x:Name="FullscreenToggle" Header="Fullscreen" />
                 </StackPanel>
             </PivotItem>
         </Pivot>

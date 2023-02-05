@@ -2,6 +2,7 @@
 using Windows.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls;
 using MobileTerminal.Classes;
+using System.Threading.Tasks;
 
 namespace MobileTerminal.Pages;
 
@@ -11,13 +12,22 @@ public sealed partial class Settings : Page
     {
         this.InitializeComponent();
         GetSettings();
-        GetAllFonts();
     }
 
-    private void GetSettings()
+    private async void GetSettings()
     {
-        string IsSendBtnHidden = localSettings.Values["HideSendBtn"] as string;
-        if (IsSendBtnHidden == "true")
+        await ApplySettingsToUiElements();
+        // Set event handlers
+        SendBtnSwitch.Toggled += SendBtnSwitch_Toggled;
+        FontSizeSelection.ValueChanged += FontSizeSelection_ValueChanged;
+        FontSelection.SelectionChanged += FontSelection_SelectionChanged;
+        ClearHistoryBtn.Click += ClearHistoryBtn_Click;
+        FullscreenToggle.Toggled += FullscreenToggle_Toggled;
+    }
+
+    private async Task ApplySettingsToUiElements()
+    {
+        if (localSettings.Values["HideSendBtn"] as string == "true")
         {
             SendBtnSwitch.IsOn = true;
         }
@@ -39,13 +49,12 @@ public sealed partial class Settings : Page
         {
             FontSelection.PlaceholderText = "Select a font...";
         }
+        if (localSettings.Values["Fullscreen"] as string == "true")
+        {
+            FullscreenToggle.IsOn = true;
+        }
     }
-
-    private void GetAllFonts()
-    {
-        var fonts = Microsoft.Graphics.Canvas.Text.CanvasTextFormat.GetSystemFontFamilies();
-        FontSelection.ItemsSource = fonts;
-    }
+    #region Apperance page
 
     private void SendBtnSwitch_Toggled(object sender, Windows.UI.Xaml.RoutedEventArgs e)
     {
@@ -66,13 +75,22 @@ public sealed partial class Settings : Page
         localSettings.Values["FontSize"] = FontSize;
     }
 
+    private void FontSelection_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+    {
+        var fonts = Microsoft.Graphics.Canvas.Text.CanvasTextFormat.GetSystemFontFamilies();
+        FontSelection.ItemsSource = fonts;
+    }
+
     private void FontSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         string Font = e.AddedItems[0].ToString();
         localSettings.Values["Font"] = Font;
     }
 
-    private async void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+    #endregion
+
+    #region History page
+    private async void ClearHistoryBtn_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
     {
         switch((sender as Button).Tag)
         {
@@ -82,4 +100,22 @@ public sealed partial class Settings : Page
                 break;
         }
     }
+
+    #endregion
+
+    #region Startup page
+    private void FullscreenToggle_Toggled(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+    {
+        if (FullscreenToggle.IsOn == true)
+        {
+            WindowManager.EnterFullScreen(true);
+            localSettings.Values["Fullscreen"] = "true";
+        }
+        else
+        {
+            WindowManager.EnterFullScreen(false);
+            localSettings.Values["Fullscreen"] = "false";
+        }
+    }
+    #endregion
 }

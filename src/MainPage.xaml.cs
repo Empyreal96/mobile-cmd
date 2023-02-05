@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml.Controls;
+using static MobileTerminal.Classes.Globals;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -11,17 +12,29 @@ public sealed partial class MainPage : Page
     public MainPage()
     {
         this.InitializeComponent();
-        WindowManager.EnterFullScreen(true);
+        GetSettings();
+    }
+
+    private void GetSettings()
+    {
+        if (localSettings.Values["Fullscreen"] as string == "true")
+        {
+            WindowManager.EnterFullScreen(true);
+        }
+        else
+        {
+            WindowManager.EnterFullScreen(false);
+        }
     }
 
     private void TabView_Loaded(object sender, RoutedEventArgs e)
     {
-        NewLocalTab();
+        NewTerminalTab();
     }
 
     private void TabView_AddButtonClick(TabView sender, object args)
     {
-        NewLocalTab();
+        NewTerminalTab();
     }
 
     private void TabView_TabCloseRequested(TabView sender, TabViewTabCloseRequestedEventArgs args)
@@ -30,49 +43,9 @@ public sealed partial class MainPage : Page
         GC.Collect();
     }
 
-    private async void NewWindow(object sender, RoutedEventArgs e)
+    public void NewTerminalTab()
     {
-        await WindowManager.OpenPageAsNewWindowAsync(typeof(MainPage));
-    }
-
-    public void NewLocalTab()
-    {
-        Globals.TelnetIP = "127.0.0.1";
-        CreateNewTab("Terminal (Local)", "Pages.Terminal", Symbol.Document);
-    }
-    private void NewLocalTab(object sender, RoutedEventArgs e)
-    {
-        NewLocalTab();
-    }
-
-    private void OpenRemoteConnectionDialog(object sender, RoutedEventArgs e)
-    {
-        RemoteConnectionDialog.Visibility = Visibility.Visible;
-    }
-    private void NewRemoteTab(object sender, RoutedEventArgs e)
-    {
-        RemoteConnectionDialog.Visibility = Visibility.Collapsed;
-        Globals.TelnetIP = IPAddressBox.Text;
-        CreateNewTab("Terminal (Remote)", "Pages.Terminal", Symbol.Document);
-    }
-
-    private void OpenHistory(object sender, RoutedEventArgs e)
-    {
-        CreateNewTab("History", "Pages.History", Symbol.Placeholder);
-    }
-
-    private void OpenSettings(object sender, RoutedEventArgs e)
-    {
-        CreateNewTab("Settings", "Pages.Settings", Symbol.Setting);
-    }
-
-    private void OpenHelp(object sender, RoutedEventArgs e)
-    {
-        CreateNewTab("Help", "Pages.Help", Symbol.Help);
-    }
-    private void OpenAbout(object sender, RoutedEventArgs e)
-    {
-        CreateNewTab("About", "Pages.About", Symbol.ContactInfo);
+        CreateNewTab("Terminal", "Pages.Terminal", Symbol.Document);
     }
 
     private void CreateNewTab(string header, object pageTag, Symbol icon)
@@ -94,5 +67,30 @@ public sealed partial class MainPage : Page
     private void Button_Click(object sender, RoutedEventArgs e)
     {
         RuntimeManager.ExitApp();
+    }
+
+    private async void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
+    {
+        switch ((sender as MenuFlyoutItem).Tag)
+        {
+            case "NewTab":
+                NewTerminalTab();
+                break;
+            case "NewWindow":
+                await WindowManager.OpenPageAsNewWindowAsync(typeof(MainPage));
+                break;
+            case "OpenHistory":
+                CreateNewTab("History", "Pages.History", Symbol.Placeholder);
+                break;
+            case "OpenSettings":
+                CreateNewTab("Settings", "Pages.Settings", Symbol.Setting);
+                break;
+            case "OpenHelp":
+                CreateNewTab("Help", "Pages.Help", Symbol.Help);
+                break;
+            case "OpenAbout":
+                CreateNewTab("About", "Pages.About", Symbol.ContactInfo);
+                break;
+        }
     }
 }

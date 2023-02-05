@@ -48,7 +48,7 @@ sealed partial class App : Application
             }
             else
             {
-                Globals.MainPageContent.NewLocalTab();
+                Globals.MainPageContent.NewTerminalTab();
             }
             // Ensure the current window is active
             Window.Current.Activate();

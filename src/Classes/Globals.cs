@@ -10,8 +10,6 @@ class Globals
     public static StorageFolder localFolder = ApplicationData.Current.LocalFolder;
 
     public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-
-    public static string TelnetIP { get; set; }
     public static bool CommandRunning { get; set; }
 
     public static string LaunchCommand { get; set; }

@@ -25,35 +25,51 @@
                     <SymbolIcon Symbol="More" />
                     <Button.Flyout>
                         <MenuFlyout>
-                            <MenuFlyoutSubItem Text="New tab">
-                                <MenuFlyoutSubItem.Icon>
+                            <MenuFlyoutItem
+                                Click="MenuFlyoutItem_Click"
+                                Tag="NewTab"
+                                Text="New tab">
+                                <MenuFlyoutItem.Icon>
                                     <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE109;" />
-                                </MenuFlyoutSubItem.Icon>
-                                <MenuFlyoutItem Click="NewLocalTab" Text="CMD/PWSH (Local)" />
-                                <MenuFlyoutItem Click="OpenRemoteConnectionDialog" Text="CMD/PWSH  (Remote)" />
-                            </MenuFlyoutSubItem>
-                            <MenuFlyoutItem Click="NewWindow" Text="New window">
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                            <MenuFlyoutItem
+                                Click="MenuFlyoutItem_Click"
+                                Tag="NewWindow"
+                                Text="New window">
                                 <MenuFlyoutItem.Icon>
                                     <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE17C;" />
                                 </MenuFlyoutItem.Icon>
                             </MenuFlyoutItem>
                             <MenuFlyoutSeparator />
-                            <MenuFlyoutItem Click="OpenHistory" Text="History">
+                            <MenuFlyoutItem
+                                Click="MenuFlyoutItem_Click"
+                                Tag="OpenHistory"
+                                Text="History">
                                 <MenuFlyoutItem.Icon>
                                     <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE81C;" />
                                 </MenuFlyoutItem.Icon>
                             </MenuFlyoutItem>
-                            <MenuFlyoutItem Click="OpenSettings" Text="Settings">
+                            <MenuFlyoutItem
+                                Click="MenuFlyoutItem_Click"
+                                Tag="OpenSettings"
+                                Text="Settings">
                                 <MenuFlyoutItem.Icon>
                                     <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE115;" />
                                 </MenuFlyoutItem.Icon>
                             </MenuFlyoutItem>
-                            <MenuFlyoutItem Click="OpenHelp" Text="Help">
+                            <MenuFlyoutItem
+                                Click="MenuFlyoutItem_Click"
+                                Tag="OpenHelp"
+                                Text="Help">
                                 <MenuFlyoutItem.Icon>
                                     <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE11B;" />
                                 </MenuFlyoutItem.Icon>
                             </MenuFlyoutItem>
-                            <MenuFlyoutItem Click="OpenAbout" Text="About">
+                            <MenuFlyoutItem
+                                Click="MenuFlyoutItem_Click"
+                                Tag="OpenAbout"
+                                Text="About">
                                 <MenuFlyoutItem.Icon>
                                     <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE946;" />
                                 </MenuFlyoutItem.Icon>
@@ -74,19 +90,5 @@
                 </Button>
             </muxc:TabView.TabStripFooter>
         </muxc:TabView>
-        <StackPanel
-            x:Name="RemoteConnectionDialog"
-            Padding="20"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-            BorderBrush="{ThemeResource SystemControlHighlightAccentBrush}"
-            BorderThickness="2"
-            Visibility="Collapsed">
-            <TextBlock Foreground="Red">SSH connections are unsupported,</TextBlock>
-            <TextBlock Foreground="Red">you can only connect to other W10M-devices with cmd injected</TextBlock>
-            <TextBox x:Name="IPAddressBox" PlaceholderText="Enter ip address" />
-            <Button Click="NewRemoteTab">Connect</Button>
-        </StackPanel>
     </Grid>
 </Page>

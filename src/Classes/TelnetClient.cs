@@ -56,7 +56,7 @@ public class TelnetClient : IDisposable
         }
 
         _tcpClient = new TcpClient();
-        await _tcpClient.ConnectAsync(Globals.TelnetIP, _port);
+        await _tcpClient.ConnectAsync("127.0.0.1", _port);
 
         _tcpReader = new StreamReader(_tcpClient.GetStream());
         _tcpWriter = new StreamWriter(_tcpClient.GetStream()) { AutoFlush = true };
