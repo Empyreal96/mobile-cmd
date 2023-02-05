@@ -51,6 +51,7 @@
                     <Paragraph>- fix: Remote connections not working</Paragraph>
                     <Paragraph>- feat: Close terminal button in titlebar</Paragraph>
                     <Paragraph>- feat: Command history</Paragraph>
+                    <Paragraph>- feat: Run command via uri (e.g. cmd:echo Hello!)</Paragraph>
                 </RichTextBlock>
             </PivotItem>
         </Pivot>
