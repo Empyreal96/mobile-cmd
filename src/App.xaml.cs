@@ -1,6 +1,5 @@
 ﻿using MobileTerminal.Classes;
 using System;
-using System.Net.Http;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Core;
@@ -8,124 +7,123 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace MobileTerminal
+namespace MobileTerminal;
+
+/// <summary>
+/// Provides application-specific behavior to supplement the default Application class.
+/// </summary>
+sealed partial class App : Application
 {
     /// <summary>
-    /// Provides application-specific behavior to supplement the default Application class.
+    /// Initializes the singleton application object.  This is the first line of authored code
+    /// executed, and as such is the logical equivalent of main() or WinMain().
     /// </summary>
-    sealed partial class App : Application
+    public App()
     {
-        /// <summary>
-        /// Initializes the singleton application object.  This is the first line of authored code
-        /// executed, and as such is the logical equivalent of main() or WinMain().
-        /// </summary>
-        public App()
-        {
-            this.InitializeComponent();
-            this.Suspending += OnSuspending;
-        }
+        this.InitializeComponent();
+        this.Suspending += OnSuspending;
+    }
 
-        protected override void OnActivated(IActivatedEventArgs args)
-        {
-            ProtocolActivatedEventArgs eventArgs = args as ProtocolActivatedEventArgs;
+    protected override void OnActivated(IActivatedEventArgs args)
+    {
+        ProtocolActivatedEventArgs eventArgs = args as ProtocolActivatedEventArgs;
 
-            if (args.Kind == ActivationKind.Protocol)
-            {
-                // TODO: Handle URI activation
-                // The received URI is eventArgs.Uri.AbsoluteUri
-                Frame rootFrame = Window.Current.Content as Frame;
-                var uri = eventArgs.Uri.ToString();
-                Globals.LaunchCommand = uri.Replace("cmd:", "");
-                // Do not repeat app initialization when the Window already has content,
-                // just ensure that the window is active
-                if (rootFrame == null)
-                {
-                    // Create a Frame to act as the navigation context and navigate to the first page
-                    rootFrame = new Frame();
-                    rootFrame.NavigationFailed += OnNavigationFailed;
-                    rootFrame.Navigate(typeof(MainPage));
-                    // Place the frame in the current Window
-                    Window.Current.Content = rootFrame;
-                }
-                else
-                {
-                    Globals.MainPageContent.NewLocalTab();
-                }
-                // Ensure the current window is active
-                Window.Current.Activate();
-            }
-        }
-
-        /// <summary>
-        /// Invoked when the application is launched normally by the end user.  Other entry points
-        /// will be used such as when the application is launched to open a specific file.
-        /// </summary>
-        /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        if (args.Kind == ActivationKind.Protocol)
         {
-            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+            // TODO: Handle URI activation
+            // The received URI is eventArgs.Uri.AbsoluteUri
             Frame rootFrame = Window.Current.Content as Frame;
-
+            var uri = eventArgs.Uri.ToString();
+            Globals.LaunchCommand = uri.Replace("cmd:", "");
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
             if (rootFrame == null)
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
-
                 rootFrame.NavigationFailed += OnNavigationFailed;
-
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                    //TODO: Load state from previously suspended application
-                }
-
+                rootFrame.Navigate(typeof(MainPage));
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
             }
-
-            if (e.PrelaunchActivated == false)
+            else
             {
-                if (rootFrame.Content == null)
-                {
-                    // When the navigation stack isn't restored navigate to the first page,
-                    // configuring the new page by passing required information as a navigation
-                    // parameter
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
-                }
-                // Ensure the current window is active
-                Window.Current.Activate();
+                Globals.MainPageContent.NewLocalTab();
             }
+            // Ensure the current window is active
+            Window.Current.Activate();
+        }
+    }
+
+    /// <summary>
+    /// Invoked when the application is launched normally by the end user.  Other entry points
+    /// will be used such as when the application is launched to open a specific file.
+    /// </summary>
+    /// <param name="e">Details about the launch request and process.</param>
+    protected override void OnLaunched(LaunchActivatedEventArgs e)
+    {
+        SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+        Frame rootFrame = Window.Current.Content as Frame;
+
+        // Do not repeat app initialization when the Window already has content,
+        // just ensure that the window is active
+        if (rootFrame == null)
+        {
+            // Create a Frame to act as the navigation context and navigate to the first page
+            rootFrame = new Frame();
+
+            rootFrame.NavigationFailed += OnNavigationFailed;
+
+            if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+            {
+                //TODO: Load state from previously suspended application
+            }
+
+            // Place the frame in the current Window
+            Window.Current.Content = rootFrame;
         }
 
-        /// <summary>
-        /// Invoked when Navigation to a certain page fails
-        /// </summary>
-        /// <param name="sender">The Frame which failed navigation</param>
-        /// <param name="e">Details about the navigation failure</param>
-        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+        if (e.PrelaunchActivated == false)
         {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
+            if (rootFrame.Content == null)
+            {
+                // When the navigation stack isn't restored navigate to the first page,
+                // configuring the new page by passing required information as a navigation
+                // parameter
+                rootFrame.Navigate(typeof(MainPage), e.Arguments);
+            }
+            // Ensure the current window is active
+            Window.Current.Activate();
         }
+    }
 
-        /// <summary>
-        /// Invoked when application execution is being suspended.  Application state is saved
-        /// without knowing whether the application will be terminated or resumed with the contents
-        /// of memory still intact.
-        /// </summary>
-        /// <param name="sender">The source of the suspend request.</param>
-        /// <param name="e">Details about the suspend request.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
-        {
-            var deferral = e.SuspendingOperation.GetDeferral();
-            //TODO: Save application state and stop any background activity
-            deferral.Complete();
-        }
+    /// <summary>
+    /// Invoked when Navigation to a certain page fails
+    /// </summary>
+    /// <param name="sender">The Frame which failed navigation</param>
+    /// <param name="e">Details about the navigation failure</param>
+    void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+    {
+        throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
+    }
 
-        private void OnBackRequested(object sender, BackRequestedEventArgs e)
-        {
-            e.Handled = true;
-            RuntimeManager.ExitApp();
-        }
+    /// <summary>
+    /// Invoked when application execution is being suspended.  Application state is saved
+    /// without knowing whether the application will be terminated or resumed with the contents
+    /// of memory still intact.
+    /// </summary>
+    /// <param name="sender">The source of the suspend request.</param>
+    /// <param name="e">Details about the suspend request.</param>
+    private void OnSuspending(object sender, SuspendingEventArgs e)
+    {
+        var deferral = e.SuspendingOperation.GetDeferral();
+        //TODO: Save application state and stop any background activity
+        deferral.Complete();
+    }
+
+    private void OnBackRequested(object sender, BackRequestedEventArgs e)
+    {
+        e.Handled = true;
+        RuntimeManager.ExitApp();
     }
 }

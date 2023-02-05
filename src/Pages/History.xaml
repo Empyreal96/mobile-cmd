@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="MobileTerminal.Pages.CommandHistory"
+    x:Class="MobileTerminal.Pages.History"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -15,15 +15,15 @@
         </Grid.RowDefinitions>
         <TextBox
             Grid.Row="0"
-            KeyDown="TextBox_KeyDown"
+            KeyDown="HistorySearchBox_KeyDown"
             PlaceholderText="Search command history" />
         <Grid Grid.Row="1">
-            <ListView x:Name="CommandHistoryListView" SelectionChanged="CommandHistoryListView_SelectionChanged">
+            <ListView x:Name="HistoryListView" SelectionChanged="HistoryListView_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
                             <TextBlock FontSize="20" Text="{Binding Command}" />
-                            <TextBlock Text="{Binding ExecutionTime}" />
+                            <TextBlock Text="{Binding ExecutionTimeDate}" />
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

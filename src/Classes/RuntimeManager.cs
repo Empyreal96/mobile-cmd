@@ -8,7 +8,7 @@ class RuntimeManager
 {
     public static async void ExitApp()
     {
-        ContentDialog dialog = new ContentDialog
+        ContentDialog dialog = new()
         {
             Title = "Close app?",
             Content = "Do you really want to exit Terminal?",

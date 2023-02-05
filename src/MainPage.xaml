@@ -12,6 +12,7 @@
     <Grid>
         <muxc:TabView
             x:Name="Tabs"
+            VerticalAlignment="Stretch"
             AddTabButtonClick="TabView_AddButtonClick"
             Loaded="TabView_Loaded"
             TabCloseRequested="TabView_TabCloseRequested">
@@ -57,11 +58,6 @@
                                     <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE946;" />
                                 </MenuFlyoutItem.Icon>
                             </MenuFlyoutItem>
-                            <MenuFlyoutSeparator />
-                            <MenuFlyoutItem
-                                Click="CloseTerminal"
-                                Icon="Cancel"
-                                Text="Close Terminal" />
                         </MenuFlyout>
                     </Button.Flyout>
                 </Button>
@@ -83,10 +79,10 @@
             Padding="20"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            x:Load="False"
             Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
             BorderBrush="{ThemeResource SystemControlHighlightAccentBrush}"
-            BorderThickness="2">
+            BorderThickness="2"
+            Visibility="Collapsed">
             <TextBlock Foreground="Red">SSH connections are unsupported,</TextBlock>
             <TextBlock Foreground="Red">you can only connect to other W10M-devices with cmd injected</TextBlock>
             <TextBox x:Name="IPAddressBox" PlaceholderText="Enter ip address" />

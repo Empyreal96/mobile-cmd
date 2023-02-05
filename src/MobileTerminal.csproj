@@ -2,7 +2,7 @@
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-	<LangVersion>11</LangVersion>
+    <LangVersion>11</LangVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{C5E59B66-AD5F-4E91-8DE6-56F4A8B82709}</ProjectGuid>
@@ -129,18 +129,20 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\AppVersion.cs" />
+    <Compile Include="Classes\FileHelper.cs" />
     <Compile Include="Classes\Json.cs" />
-    <Compile Include="Pages\CommandHistory.xaml.cs">
-      <DependentUpon>CommandHistory.xaml</DependentUpon>
+    <Compile Include="Pages\History.xaml.cs">
+      <DependentUpon>History.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PenguinApps.Core.OSS\ExceptionHelper.cs" />
+    <Compile Include="Classes\ExceptionHelper.cs" />
     <Compile Include="Classes\Globals.cs" />
     <Compile Include="Classes\RuntimeManager.cs" />
     <Compile Include="Classes\TelnetClient.cs" />
     <Compile Include="Classes\Tools.cs" />
-    <Compile Include="PenguinApps.Core.OSS\SystemHelper.cs" />
-    <Compile Include="PenguinApps.Core.OSS\UI.cs" />
-    <Compile Include="PenguinApps.Core.OSS\WindowManager.cs" />
+    <Compile Include="Classes\SystemHelper.cs" />
+    <Compile Include="Classes\UI.cs" />
+    <Compile Include="Classes\WindowManager.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -225,7 +227,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\CommandHistory.xaml">
+    <Page Include="Pages\History.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -247,7 +249,7 @@
       <Version>6.2.14</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
-      <Version>2.5.0</Version>
+      <Version>2.4.3</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.2</Version>

@@ -18,17 +18,12 @@
                                 Width="64"
                                 Height="64"
                                 Source="ms-appx:///Assets/Square44x44Logo.png" />
-                            <RichTextBlock VerticalAlignment="Center">
-                                <Paragraph>Mobile Terminal v0.4.1</Paragraph>
-                            </RichTextBlock>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock x:Name="MobileTerminalVersion" />
+                                <TextBlock>by Pinguin2001, originally written by Empyreal96</TextBlock>
+                            </StackPanel>
                         </StackPanel>
                         <RichTextBlock>
-                            <Paragraph FontSize="20">
-                                Developers/Maintainers
-                            </Paragraph>
-                            <Paragraph>Made by Empyreal96</Paragraph>
-                            <Paragraph>Now maintained by Pinguin2001</Paragraph>
-
                             <Paragraph FontSize="20">
                                 Updates
                             </Paragraph>
@@ -43,8 +38,7 @@
 
                             <Paragraph FontSize="20">Dependencies</Paragraph>
                             <Paragraph>Microsoft.NETCore.UniversalWindowsPlatform v6.2.14</Paragraph>
-                            <Paragraph>Microsoft.UI.Xaml v2.5</Paragraph>
-                            <Paragraph>PenguinApps.Core.OSS v1.0</Paragraph>
+                            <Paragraph>Microsoft.UI.Xaml v2.4</Paragraph>
                             <Paragraph>Win2D v1.26.0</Paragraph>
                         </RichTextBlock>
                     </StackPanel>
@@ -52,10 +46,11 @@
             </PivotItem>
             <PivotItem Header="Changelog">
                 <RichTextBlock>
-                    <Paragraph>v0.4</Paragraph>
-                    <Paragraph>- Added support for remote connections (preview)</Paragraph>
-                    <Paragraph>- Merge CMD mode and PowerShell with Hybrid mode</Paragraph>
-                    <Paragraph>- Various bug fixes</Paragraph>
+                    <Paragraph>v0.5</Paragraph>
+                    <Paragraph>- lang: Update to C#11</Paragraph>
+                    <Paragraph>- fix: Remote connections not working</Paragraph>
+                    <Paragraph>- feat: Close terminal button in titlebar</Paragraph>
+                    <Paragraph>- feat: Command history</Paragraph>
                 </RichTextBlock>
             </PivotItem>
         </Pivot>

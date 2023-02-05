@@ -1,12 +1,13 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using PenguinApps.Core;
+using Windows.UI.Xaml.Controls;
 
-namespace MobileTerminal.Pages
+namespace MobileTerminal.Pages;
+
+public sealed partial class About : Page
 {
-    public sealed partial class About : Page
+    public About()
     {
-        public About()
-        {
-            this.InitializeComponent();
-        }
+        this.InitializeComponent();
+        MobileTerminalVersion.Text = "MobileTerminal v" + AppVersion.GetAppVersion() + " Beta";
     }
 }

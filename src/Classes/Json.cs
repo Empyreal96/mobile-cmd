@@ -45,6 +45,4 @@ public static class Json
             await FileIO.WriteTextAsync((IStorageFile)fileData, newJson);
         }
     }
-
-
 }
