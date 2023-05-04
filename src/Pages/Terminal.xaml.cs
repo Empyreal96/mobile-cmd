@@ -17,12 +17,14 @@ public sealed partial class Terminal : Page
     string LocalPath = ApplicationData.Current.LocalFolder.Path;
     static CancellationTokenSource cancellationTokenSource = new();
     TelnetClient client = new(TimeSpan.FromSeconds(1), cancellationTokenSource.Token);
+    string TempFileName = $"{DateTimeOffset.UtcNow.ToUnixTimeSeconds()}-temp.txt";
     public Terminal()
     {
         this.InitializeComponent();
-        ApplicationData.Current.LocalFolder.CreateFileAsync("cmdstring.txt", CreationCollisionOption.ReplaceExisting);
+        
         try
         {
+            ApplicationData.Current.LocalFolder.CreateFileAsync(TempFileName, CreationCollisionOption.ReplaceExisting);
             GetSettings();
             try
             {
@@ -40,6 +42,12 @@ public sealed partial class Terminal : Page
         }
     }
 
+    public async void DeleteTempFile()
+    {
+        StorageFile TempFile = await ApplicationData.Current.LocalFolder.GetFileAsync(TempFileName);
+        await TempFile.DeleteAsync();
+    }
+
     public async void Connect()
     {
         try
@@ -47,8 +55,8 @@ public sealed partial class Terminal : Page
             BlockTextInput(true);
             CMDtestText.Text = $"Connecting to device...";
             await client.Connect();
-            await client.Send($"echo %CD%^> > \"{LocalPath}\\cmdstring.txt\" 2>&1");
-            string currentpath = File.ReadAllText($"{LocalPath}\\cmdstring.txt");
+            await client.Send($"echo %CD%^> > \"{LocalPath}\\{TempFileName}\" 2>&1");
+            string currentpath = File.ReadAllText($"{LocalPath}\\{TempFileName}");
             CMDtestText.Text =
                 $"Mobile Terminal [Version " + AppVersion.GetAppVersion() + " Beta]\n" +
                 $"\n{currentpath}";
@@ -110,70 +118,57 @@ public sealed partial class Terminal : Page
 
     private async void SendCommand(string command)
     {
-        // Prevent two commands running at the same time in different tabs
-        if (Globals.CommandRunning)
+        // Block text input
+        BlockTextInput(true);
+        // Clear text input
+        ClearTextInput();
+        var text = CMDtestText.Text;
+        CMDtestText.Text = text.Remove(text.Length - 2);
+        // Write command to UI
+        CMDtestText.Text += $"{command}\n";
+        if (Tools.IsCommandMalicious(command))
         {
-            await UI.ShowDialog("Error", "You cannot run two commands at the same time");
+            CMDtestText.Text += "Command aborted. The command you tried to run is malicious";
+            await ShowCurrentPath();
+            BlockTextInput(false);
+            return;
         }
-        else
+        if (command.Length != 0)
         {
-            // Change "CommandRunning" to "true" to prevent another command from running
-            Globals.CommandRunning = true;
-            // Block text input
-            BlockTextInput(true);
-            // Clear text input
-            ClearTextInput();
-            var text = CMDtestText.Text;
-            CMDtestText.Text = text.Remove(text.Length - 2);
-            // Write command to UI
-            CMDtestText.Text += $"{command}\n";
-            // Check if command is malicious and if it isnt run the command
-            bool IsCommandMalicious = Tools.CheckForMaliciousCommand(command);
-            if (!IsCommandMalicious)
+            if (command == "cls")
             {
-                if (command.Length != 0)
-                {
-                    if (command == "cls")
-                    {
-                        CMDtestText.Text = "";
-                        await ShowCurrentPath();
-                    }
-                    if (command == "exit")
-                    {
-                        RuntimeManager.ExitApp();
-                        await ShowCurrentPath();
-                    }
-                    else
-                    {
-                        if (!command.StartsWith("PS "))
-                        {
-                            // Run CMD command
-                            await client.Send($"{command} > \"{LocalPath}\\cmdstring.txt\" 2>&1");
-                        }
-                        else
-                        {
-                            // Run PS command
-                            int n = 3;
-                            string pwshcommand = command.Remove(0, n);
-                            await client.Send($"PowerShell.exe -Command {pwshcommand} > \"{LocalPath}\\cmdstring.txt\" 2>&1");
-                        }
-                        TestIfFileAccessable();
-                    }
-                    Json.AddItemToJson("History.json", command, DateTime.Now.ToString());
-                }
+                CMDtestText.Text = "";
+                await ShowCurrentPath();
+            }
+            if (command == "exit")
+            {
+                RuntimeManager.ExitApp();
+                await ShowCurrentPath();
             }
             else
             {
-                CMDtestText.Text += "Command aborted. The command you tried to run is malicious";
+                if (!command.StartsWith("PS "))
+                {
+                    // Run CMD command
+                    await client.Send($"{command} > \"{LocalPath}\\{TempFileName}\" 2>&1");
+                }
+                else
+                {
+                    // Run PS command
+                    int n = 3;
+                    string pwshcommand = command.Remove(0, n);
+                    await client.Send($"PowerShell.exe -Command {pwshcommand} > \"{LocalPath}\\{TempFileName}\" 2>&1");
+                }
+                TestIfFileAccessable();
             }
-            // Change "CommandRunning" to false, since the command now finish running
-            Globals.CommandRunning = false;
+            BlockTextInput(false);
+            Json.AddItemToJson("History.json", command, DateTime.Now.ToString());
         }
     }
 
     private async void TestIfFileAccessable()
     {
-        bool IsFileUsed = Tools.IsFileAccessable($"{LocalPath}\\cmdstring.txt");
+        bool IsFileUsed = Tools.IsFileAccessable($"{LocalPath}\\{TempFileName}");
         if (IsFileUsed == false)
         {
             GetOutput();
@@ -190,7 +185,7 @@ public sealed partial class Terminal : Page
         try
         {
             // Append command output to TextBox
-            CMDtestText.Text += "\n" + File.ReadAllText($"{LocalPath}\\cmdstring.txt");
+            CMDtestText.Text += "\n" + File.ReadAllText($"{LocalPath}\\{TempFileName}");
             await ShowCurrentPath();
             // Scroll to bottom to show results
             var grid = (Grid)VisualTreeHelper.GetChild(CMDtestText, 0);
@@ -213,8 +208,8 @@ public sealed partial class Terminal : Page
     private async Task ShowCurrentPath()
     {
         // Show current path
-        await client.Send($"echo %CD%^> > \"{LocalPath}\\cmdstring.txt\" 2>&1");
-        string currentpath = File.ReadAllText($"{LocalPath}\\cmdstring.txt");
+        await client.Send($"echo %CD%^> > \"{LocalPath}\\{TempFileName}\" 2>&1");
+        string currentpath = File.ReadAllText($"{LocalPath}\\{TempFileName}");
         CMDtestText.Text += "\n\n" + $"{currentpath}";
     }
 

@@ -4,7 +4,7 @@ namespace MobileTerminal.Classes;
 
 class Tools
 {
-    public static bool CheckForMaliciousCommand(string command)
+    public static bool IsCommandMalicious(string command)
     {
         if (command.Contains("\\.\\globalroot\\device\\condrv\\kernelconnect") || command.Contains("%0|%0"))
         {

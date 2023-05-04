@@ -1,9 +1,10 @@
-﻿using Microsoft.UI.Xaml.Controls;
+﻿using MUXC = Microsoft.UI.Xaml.Controls;
 using static MobileTerminal.Classes.Globals;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using MobileTerminal.Classes;
+using MobileTerminal.Pages;
 
 namespace MobileTerminal;
 
@@ -32,15 +33,17 @@ public sealed partial class MainPage : Page
         NewTerminalTab();
     }
 
-    private void TabView_AddButtonClick(TabView sender, object args)
+    private void TabView_AddButtonClick(MUXC.TabView sender, object args)
     {
         NewTerminalTab();
     }
 
-    private void TabView_TabCloseRequested(TabView sender, TabViewTabCloseRequestedEventArgs args)
+    private void TabView_TabCloseRequested(MUXC.TabView sender, MUXC.TabViewTabCloseRequestedEventArgs args)
     {
+        MUXC.TabViewItem selectedItem = args.Tab;
+        var tabcontent = (Frame)selectedItem.Content;
+        if (tabcontent.Content is Terminal) (tabcontent.Content as Terminal).DeleteTempFile();
         sender.TabItems.Remove(args.Tab);
-        GC.Collect();
     }
 
     public void NewTerminalTab()
@@ -50,10 +53,10 @@ public sealed partial class MainPage : Page
 
     private void CreateNewTab(string header, object pageTag, Symbol icon)
     {
-        TabViewItem newItem = new()
+        MUXC.TabViewItem newItem = new()
         {
             Header = header,
-            IconSource = new Microsoft.UI.Xaml.Controls.SymbolIconSource() { Symbol = icon }
+            IconSource = new MUXC.SymbolIconSource() { Symbol = icon }
         };
 
         Frame frame = new();
