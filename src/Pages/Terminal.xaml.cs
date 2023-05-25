@@ -142,8 +142,8 @@ public sealed partial class Terminal : Page
             }
             if (command == "exit")
             {
-                RuntimeManager.ExitApp();
-                await ShowCurrentPath();
+                DeleteTempFile();
+                CoreApplication.Exit();
             }
             else
             {

@@ -67,11 +67,6 @@ public sealed partial class MainPage : Page
         Tabs.SelectedItem = newItem;
     }
 
-    private void Button_Click(object sender, RoutedEventArgs e)
-    {
-        RuntimeManager.ExitApp();
-    }
-
     private async void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
     {
         switch ((sender as MenuFlyoutItem).Tag)
